@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: user-server
+  cloud:
+    inetutils:
+      default-ip-address: 39.108.127.117
+
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+    prefer-ip-address: true
+    ip-address: 39.108.127.117
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
