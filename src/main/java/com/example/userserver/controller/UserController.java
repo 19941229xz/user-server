@@ -14,7 +14,6 @@ import javax.validation.Valid;
 @Api(value = "user模块接口",description = "这是一个用户信息模块的接口文档")
 @RestController
 @Slf4j
-@CrossOrigin
 public class UserController {
 
 	@Autowired

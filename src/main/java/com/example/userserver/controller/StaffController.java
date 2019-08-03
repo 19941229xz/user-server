@@ -14,7 +14,6 @@ import javax.validation.Valid;
 @Api(value = "staff模块接口",description = "这是一个职工模块的接口文档")
 @RestController
 @Slf4j
-@CrossOrigin
 public class StaffController {
 
 	@Autowired

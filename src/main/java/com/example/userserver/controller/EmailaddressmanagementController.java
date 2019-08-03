@@ -14,7 +14,6 @@ import javax.validation.Valid;
 @Api(value = "emailaddressmanagement模块接口",description = "这是一个模块的接口文档")
 @RestController
 @Slf4j
-@CrossOrigin
 public class EmailaddressmanagementController {
 
 	@Autowired

@@ -14,7 +14,6 @@ import javax.validation.Valid;
 @Api(value = "position模块接口",description = "这是一个用户职位模块的接口文档")
 @RestController
 @Slf4j
-@CrossOrigin
 public class PositionController {
 
 	@Autowired
