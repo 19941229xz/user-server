@@ -1,6 +1,5 @@
 server:
-  port: 8787
-
+  port: 7777
 
 eureka:
   client:
@@ -8,4 +7,4 @@ eureka:
       defaultZone: http://39.108.127.117:10000/eureka/,http://60.205.212.112:10000/eureka/
 spring:
   profiles:
-    active: xiong
+    active: devKy

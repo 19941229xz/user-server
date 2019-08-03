@@ -1,0 +1,93 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: user-server
+
+  rabbitmq:
+    host: 47.93.252.104
+    port: 5672
+    username: admin
+    password: admin
+    application:
+      name: user-server
+    cloud:
+      stream:
+        bindings:
+          output:
+            destination: trade
+            contentType: 'application/json'
+      config:
+        discovery:
+          enabled: true
+          service-id: CONFIG-SERVER
+        profile: test
+      inetutils:
+        default-ip-address: 60.205.212.112
+
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: root
+    timeout: 5000
+
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user_server?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+
+    druid:
+      filters: stat,wall,slf4j,config
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.userserver.model
+
+
+logging:
+  level:
+    com.example.userserver : debug
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+    prefer-ip-address: true
+    ip-address: 60.205.212.112
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://39.108.127.117:10000/eureka/,http://60.205.212.112:10000/eureka/
+
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoint:
+    env:
+      enabled: true
+    web:
+      exposure:
+        include: '*'

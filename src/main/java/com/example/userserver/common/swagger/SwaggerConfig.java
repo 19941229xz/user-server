@@ -1,7 +1,7 @@
 package com.example.userserver.common.swagger;
 
-import com.example.message.common.HttpCode;
-import com.example.message.common.SystemConfig;
+import com.example.userserver.common.HttpCode;
+import com.example.userserver.common.SystemConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,7 +50,7 @@ public class SwaggerConfig {
                 .globalResponseMessage(RequestMethod.DELETE, responseMessageList)
         		.apiInfo(apiInfo()).select()
 //                   当前包路径
-                   .apis(RequestHandlerSelectors.basePackage("org.wlxy.example"))
+                   .apis(RequestHandlerSelectors.basePackage("com.example.userserver"))
 //                   .apis(RequestHandlerSelectors.basePackage("com.example.demo.common"))  // 将loginController 移到common中
                     .paths(PathSelectors.any()).build().globalOperationParameters(pars);
         
