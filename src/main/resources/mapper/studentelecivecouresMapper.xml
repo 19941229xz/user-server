@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.StudentelecivecouresDao">
+	<!-- 动态条件查询studentelecivecoures -->
+	<select id="getAllStudentelecivecoures" parameterType="Studentelecivecoures" resultType="Studentelecivecoures">SELECT * FROM studentelecivecoures
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 学生id（关联学生表） -->  
+			<if test=" studentId !=null and studentId !='' ">and studentId=#{studentId}</if>  
+			<!-- 课程Id（关联课程表） -->  
+			<if test=" couresId !=null and couresId !='' ">and couresId=#{couresId}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存studentelecivecoures -->
+	<insert parameterType="Studentelecivecoures" id="addStudentelecivecoures">INSERT INTO studentelecivecoures
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 学生id（关联学生表） -->  
+			<if test=" studentId !=null and studentId !='' ">studentId,</if>  
+			<!-- 课程Id（关联课程表） -->  
+			<if test=" couresId !=null and couresId !='' ">couresId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 学生id（关联学生表） -->  
+			<if test=" studentId !=null and studentId !='' ">#{studentId},</if>  
+			<!-- 课程Id（关联课程表） -->  
+			<if test=" couresId !=null and couresId !='' ">#{couresId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新studentelecivecoures -->
+	<update id="updateStudentelecivecoures" parameterType="Studentelecivecoures">update studentelecivecoures set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 学生id（关联学生表） -->  
+			<if test=" studentId !=null and studentId !='' ">studentId=#{studentId},</if>  
+			<!-- 课程Id（关联课程表） -->  
+			<if test=" couresId !=null and couresId !='' ">couresId=#{couresId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

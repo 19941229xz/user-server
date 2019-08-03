@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.SchoolDao">
+	<!-- 动态条件查询school -->
+	<select id="getAllSchool" parameterType="School" resultType="School">SELECT * FROM school
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 学校名称 -->  
+			<if test=" name !=null and name !='' ">and name=#{name}</if>  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<if test=" type !=null and type !='' ">and type=#{type}</if>  
+			<!-- 学校地址，用于关联地区表 -->  
+			<if test=" address !=null and address !='' ">and address=#{address}</if>  
+			<!-- 学费情况 -->  
+			<if test=" tuition !=null and tuition !='' ">and tuition=#{tuition}</if>  
+			<!-- 师资条件Id（用于关联教师职位） -->  
+			<if test=" teachePositionId !=null and teachePositionId !='' ">and teachePositionId=#{teachePositionId}</if>  
+			<!-- 服务热线 -->  
+			<if test=" serviceHotline !=null and serviceHotline !='' ">and serviceHotline=#{serviceHotline}</if>  
+			<!-- 地址邮箱 -->  
+			<if test=" email !=null and email !='' ">and email=#{email}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存school -->
+	<insert parameterType="School" id="addSchool">INSERT INTO school
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 学校名称 -->  
+			<if test=" name !=null and name !='' ">name,</if>  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<if test=" type !=null and type !='' ">type,</if>  
+			<!-- 学校地址，用于关联地区表 -->  
+			<if test=" address !=null and address !='' ">address,</if>  
+			<!-- 学费情况 -->  
+			<if test=" tuition !=null and tuition !='' ">tuition,</if>  
+			<!-- 师资条件Id（用于关联教师职位） -->  
+			<if test=" teachePositionId !=null and teachePositionId !='' ">teachePositionId,</if>  
+			<!-- 服务热线 -->  
+			<if test=" serviceHotline !=null and serviceHotline !='' ">serviceHotline,</if>  
+			<!-- 地址邮箱 -->  
+			<if test=" email !=null and email !='' ">email,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 学校名称 -->  
+			<if test=" name !=null and name !='' ">#{name},</if>  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<if test=" type !=null and type !='' ">#{type},</if>  
+			<!-- 学校地址，用于关联地区表 -->  
+			<if test=" address !=null and address !='' ">#{address},</if>  
+			<!-- 学费情况 -->  
+			<if test=" tuition !=null and tuition !='' ">#{tuition},</if>  
+			<!-- 师资条件Id（用于关联教师职位） -->  
+			<if test=" teachePositionId !=null and teachePositionId !='' ">#{teachePositionId},</if>  
+			<!-- 服务热线 -->  
+			<if test=" serviceHotline !=null and serviceHotline !='' ">#{serviceHotline},</if>  
+			<!-- 地址邮箱 -->  
+			<if test=" email !=null and email !='' ">#{email},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新school -->
+	<update id="updateSchool" parameterType="School">update school set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 学校名称 -->  
+			<if test=" name !=null and name !='' ">name=#{name},</if>  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<if test=" type !=null and type !='' ">type=#{type},</if>  
+			<!-- 学校地址，用于关联地区表 -->  
+			<if test=" address !=null and address !='' ">address=#{address},</if>  
+			<!-- 学费情况 -->  
+			<if test=" tuition !=null and tuition !='' ">tuition=#{tuition},</if>  
+			<!-- 师资条件Id（用于关联教师职位） -->  
+			<if test=" teachePositionId !=null and teachePositionId !='' ">teachePositionId=#{teachePositionId},</if>  
+			<!-- 服务热线 -->  
+			<if test=" serviceHotline !=null and serviceHotline !='' ">serviceHotline=#{serviceHotline},</if>  
+			<!-- 地址邮箱 -->  
+			<if test=" email !=null and email !='' ">email=#{email},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

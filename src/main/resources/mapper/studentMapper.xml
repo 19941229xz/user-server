@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.StudentDao">
+	<!-- 动态条件查询student -->
+	<select id="getAllStudent" parameterType="Student" resultType="Student">SELECT * FROM student
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schoolId !=null and schoolId !='' ">and schoolId=#{schoolId}</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" faculty !=null and faculty !='' ">and faculty=#{faculty}</if>  
+			<!-- 学生姓名 -->  
+			<if test=" studentName !=null and studentName !='' ">and studentName=#{studentName}</if>  
+			<!-- 所属班级id（关联班级表） -->  
+			<if test=" banjiId !=null and banjiId !='' ">and banjiId=#{banjiId}</if>  
+			<!-- 性别（1、男，2女） -->  
+			<if test=" gender !=null and gender !='' ">and gender=#{gender}</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">and age=#{age}</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">and credit=#{credit}</if>  
+			<!-- 所属地id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">and regionId=#{regionId}</if>  
+			<!-- 选课id（关联选课表） -->  
+			<if test=" electiveCouresId !=null and electiveCouresId !='' ">and electiveCouresId=#{electiveCouresId}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存student -->
+	<insert parameterType="Student" id="addStudent">INSERT INTO student
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId,</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" faculty !=null and faculty !='' ">faculty,</if>  
+			<!-- 学生姓名 -->  
+			<if test=" studentName !=null and studentName !='' ">studentName,</if>  
+			<!-- 所属班级id（关联班级表） -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId,</if>  
+			<!-- 性别（1、男，2女） -->  
+			<if test=" gender !=null and gender !='' ">gender,</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">age,</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">credit,</if>  
+			<!-- 所属地id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">regionId,</if>  
+			<!-- 选课id（关联选课表） -->  
+			<if test=" electiveCouresId !=null and electiveCouresId !='' ">electiveCouresId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schoolId !=null and schoolId !='' ">#{schoolId},</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" faculty !=null and faculty !='' ">#{faculty},</if>  
+			<!-- 学生姓名 -->  
+			<if test=" studentName !=null and studentName !='' ">#{studentName},</if>  
+			<!-- 所属班级id（关联班级表） -->  
+			<if test=" banjiId !=null and banjiId !='' ">#{banjiId},</if>  
+			<!-- 性别（1、男，2女） -->  
+			<if test=" gender !=null and gender !='' ">#{gender},</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">#{age},</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">#{credit},</if>  
+			<!-- 所属地id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">#{regionId},</if>  
+			<!-- 选课id（关联选课表） -->  
+			<if test=" electiveCouresId !=null and electiveCouresId !='' ">#{electiveCouresId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新student -->
+	<update id="updateStudent" parameterType="Student">update student set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId=#{schoolId},</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" faculty !=null and faculty !='' ">faculty=#{faculty},</if>  
+			<!-- 学生姓名 -->  
+			<if test=" studentName !=null and studentName !='' ">studentName=#{studentName},</if>  
+			<!-- 所属班级id（关联班级表） -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId=#{banjiId},</if>  
+			<!-- 性别（1、男，2女） -->  
+			<if test=" gender !=null and gender !='' ">gender=#{gender},</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">age=#{age},</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">credit=#{credit},</if>  
+			<!-- 所属地id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">regionId=#{regionId},</if>  
+			<!-- 选课id（关联选课表） -->  
+			<if test=" electiveCouresId !=null and electiveCouresId !='' ">electiveCouresId=#{electiveCouresId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

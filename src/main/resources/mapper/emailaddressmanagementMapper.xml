@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.EmailaddressmanagementDao">
+	<!-- 动态条件查询emailaddressmanagement -->
+	<select id="getAllEmailaddressmanagement" parameterType="Emailaddressmanagement" resultType="Emailaddressmanagement">SELECT * FROM emailaddressmanagement
+		<where> 
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 发送邮件的本地账号 -->  
+			<if test=" emailAddress !=null and emailAddress !='' ">and emailAddress=#{emailAddress}</if>  
+			<!-- 授权码 -->  
+			<if test=" authorizationCode !=null and authorizationCode !='' ">and authorizationCode=#{authorizationCode}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存emailaddressmanagement -->
+	<insert parameterType="Emailaddressmanagement" id="addEmailaddressmanagement">INSERT INTO emailaddressmanagement
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 发送邮件的本地账号 -->  
+			<if test=" emailAddress !=null and emailAddress !='' ">emailAddress,</if>  
+			<!-- 授权码 -->  
+			<if test=" authorizationCode !=null and authorizationCode !='' ">authorizationCode,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 发送邮件的本地账号 -->  
+			<if test=" emailAddress !=null and emailAddress !='' ">#{emailAddress},</if>  
+			<!-- 授权码 -->  
+			<if test=" authorizationCode !=null and authorizationCode !='' ">#{authorizationCode},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新emailaddressmanagement -->
+	<update id="updateEmailaddressmanagement" parameterType="Emailaddressmanagement">update emailaddressmanagement set 
+		<trim suffixOverrides=","> 
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 发送邮件的本地账号 -->  
+			<if test=" emailAddress !=null and emailAddress !='' ">emailAddress=#{emailAddress},</if>  
+			<!-- 授权码 -->  
+			<if test=" authorizationCode !=null and authorizationCode !='' ">authorizationCode=#{authorizationCode},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

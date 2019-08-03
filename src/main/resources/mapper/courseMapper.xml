@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.CourseDao">
+	<!-- 动态条件查询course -->
+	<select id="getAllCourse" parameterType="Course" resultType="Course">SELECT * FROM course
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 课程名称 -->  
+			<if test=" name !=null and name !='' ">and name=#{name}</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">and credit=#{credit}</if>  
+			<!-- 学时 -->  
+			<if test=" hour !=null and hour !='' ">and hour=#{hour}</if>  
+			<!-- 开设院系（关联学校院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">and facultyId=#{facultyId}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存course -->
+	<insert parameterType="Course" id="addCourse">INSERT INTO course
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 课程名称 -->  
+			<if test=" name !=null and name !='' ">name,</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">credit,</if>  
+			<!-- 学时 -->  
+			<if test=" hour !=null and hour !='' ">hour,</if>  
+			<!-- 开设院系（关联学校院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">facultyId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 课程名称 -->  
+			<if test=" name !=null and name !='' ">#{name},</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">#{credit},</if>  
+			<!-- 学时 -->  
+			<if test=" hour !=null and hour !='' ">#{hour},</if>  
+			<!-- 开设院系（关联学校院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">#{facultyId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新course -->
+	<update id="updateCourse" parameterType="Course">update course set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 课程名称 -->  
+			<if test=" name !=null and name !='' ">name=#{name},</if>  
+			<!-- 学分 -->  
+			<if test=" credit !=null and credit !='' ">credit=#{credit},</if>  
+			<!-- 学时 -->  
+			<if test=" hour !=null and hour !='' ">hour=#{hour},</if>  
+			<!-- 开设院系（关联学校院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">facultyId=#{facultyId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

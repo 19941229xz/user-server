@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.UserloginiprecordDao">
+	<!-- 动态条件查询userloginiprecord -->
+	<select id="getAllUserloginiprecord" parameterType="Userloginiprecord" resultType="Userloginiprecord">SELECT * FROM userloginiprecord
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>  
+			<!-- 登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">and loginIp=#{loginIp}</if>  
+			<!-- 登录总次数 -->  
+			<if test=" totalLogins !=null and totalLogins !='' ">and totalLogins=#{totalLogins}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存userloginiprecord -->
+	<insert parameterType="Userloginiprecord" id="addUserloginiprecord">INSERT INTO userloginiprecord
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId,</if>  
+			<!-- 登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">loginIp,</if>  
+			<!-- 登录总次数 -->  
+			<if test=" totalLogins !=null and totalLogins !='' ">totalLogins,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">#{userId},</if>  
+			<!-- 登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">#{loginIp},</if>  
+			<!-- 登录总次数 -->  
+			<if test=" totalLogins !=null and totalLogins !='' ">#{totalLogins},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新userloginiprecord -->
+	<update id="updateUserloginiprecord" parameterType="Userloginiprecord">update userloginiprecord set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>  
+			<!-- 登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">loginIp=#{loginIp},</if>  
+			<!-- 登录总次数 -->  
+			<if test=" totalLogins !=null and totalLogins !='' ">totalLogins=#{totalLogins},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

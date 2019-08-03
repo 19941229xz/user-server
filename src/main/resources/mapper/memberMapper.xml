@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.MemberDao">
+	<!-- 动态条件查询member -->
+	<select id="getAllMember" parameterType="Member" resultType="Member">SELECT * FROM member
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 会员等级 -->  
+			<if test=" level !=null and level !='' ">and level=#{level}</if>  
+			<!-- 会员积分 -->  
+			<if test=" points !=null and points !='' ">and points=#{points}</if>  
+			<!-- 注册会员时间 -->  
+			<if test=" regTime !=null and regTime !='' ">and regTime=#{regTime}</if>  
+			<!-- 会员到期时间 -->  
+			<if test=" deadLine !=null and deadLine !='' ">and deadLine=#{deadLine}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存member -->
+	<insert parameterType="Member" id="addMember">INSERT INTO member
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 会员等级 -->  
+			<if test=" level !=null and level !='' ">level,</if>  
+			<!-- 会员积分 -->  
+			<if test=" points !=null and points !='' ">points,</if>  
+			<!-- 注册会员时间 -->  
+			<if test=" regTime !=null and regTime !='' ">regTime,</if>  
+			<!-- 会员到期时间 -->  
+			<if test=" deadLine !=null and deadLine !='' ">deadLine,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 会员等级 -->  
+			<if test=" level !=null and level !='' ">#{level},</if>  
+			<!-- 会员积分 -->  
+			<if test=" points !=null and points !='' ">#{points},</if>  
+			<!-- 注册会员时间 -->  
+			<if test=" regTime !=null and regTime !='' ">#{regTime},</if>  
+			<!-- 会员到期时间 -->  
+			<if test=" deadLine !=null and deadLine !='' ">#{deadLine},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新member -->
+	<update id="updateMember" parameterType="Member">update member set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 会员等级 -->  
+			<if test=" level !=null and level !='' ">level=#{level},</if>  
+			<!-- 会员积分 -->  
+			<if test=" points !=null and points !='' ">points=#{points},</if>  
+			<!-- 注册会员时间 -->  
+			<if test=" regTime !=null and regTime !='' ">regTime=#{regTime},</if>  
+			<!-- 会员到期时间 -->  
+			<if test=" deadLine !=null and deadLine !='' ">deadLine=#{deadLine},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

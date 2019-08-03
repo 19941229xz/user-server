@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.CommentDao">
+	<!-- 动态条件查询comment -->
+	<select id="getAllComment" parameterType="Comment" resultType="Comment">SELECT * FROM comment
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 评论图片 -->  
+			<if test=" img !=null and img !='' ">and img=#{img}</if>  
+			<!-- 评论类别（1好评 2中评 3差评） -->  
+			<if test=" type !=null and type !='' ">and type=#{type}</if>  
+			<!-- 评论星级（1-5分别对应1-5星） -->  
+			<if test=" level !=null and level !='' ">and level=#{level}</if>  
+			<!-- 评论内容 -->  
+			<if test=" content !=null and content !='' ">and content=#{content}</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">and userId=#{userId}</if>  
+			<!-- 不赞同人数 -->  
+			<if test=" disagreeNum !=null and disagreeNum !='' ">and disagreeNum=#{disagreeNum}</if>  
+			<!-- 赞同人数 -->  
+			<if test=" agreeNum !=null and agreeNum !='' ">and agreeNum=#{agreeNum}</if>  
+			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
+			<if test=" parentCommentId !=null and parentCommentId !='' ">and parentCommentId=#{parentCommentId}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存comment -->
+	<insert parameterType="Comment" id="addComment">INSERT INTO comment
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 评论图片 -->  
+			<if test=" img !=null and img !='' ">img,</if>  
+			<!-- 评论类别（1好评 2中评 3差评） -->  
+			<if test=" type !=null and type !='' ">type,</if>  
+			<!-- 评论星级（1-5分别对应1-5星） -->  
+			<if test=" level !=null and level !='' ">level,</if>  
+			<!-- 评论内容 -->  
+			<if test=" content !=null and content !='' ">content,</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId,</if>  
+			<!-- 不赞同人数 -->  
+			<if test=" disagreeNum !=null and disagreeNum !='' ">disagreeNum,</if>  
+			<!-- 赞同人数 -->  
+			<if test=" agreeNum !=null and agreeNum !='' ">agreeNum,</if>  
+			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
+			<if test=" parentCommentId !=null and parentCommentId !='' ">parentCommentId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 评论图片 -->  
+			<if test=" img !=null and img !='' ">#{img},</if>  
+			<!-- 评论类别（1好评 2中评 3差评） -->  
+			<if test=" type !=null and type !='' ">#{type},</if>  
+			<!-- 评论星级（1-5分别对应1-5星） -->  
+			<if test=" level !=null and level !='' ">#{level},</if>  
+			<!-- 评论内容 -->  
+			<if test=" content !=null and content !='' ">#{content},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">#{userId},</if>  
+			<!-- 不赞同人数 -->  
+			<if test=" disagreeNum !=null and disagreeNum !='' ">#{disagreeNum},</if>  
+			<!-- 赞同人数 -->  
+			<if test=" agreeNum !=null and agreeNum !='' ">#{agreeNum},</if>  
+			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
+			<if test=" parentCommentId !=null and parentCommentId !='' ">#{parentCommentId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新comment -->
+	<update id="updateComment" parameterType="Comment">update comment set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 评论图片 -->  
+			<if test=" img !=null and img !='' ">img=#{img},</if>  
+			<!-- 评论类别（1好评 2中评 3差评） -->  
+			<if test=" type !=null and type !='' ">type=#{type},</if>  
+			<!-- 评论星级（1-5分别对应1-5星） -->  
+			<if test=" level !=null and level !='' ">level=#{level},</if>  
+			<!-- 评论内容 -->  
+			<if test=" content !=null and content !='' ">content=#{content},</if>  
+			<!-- 用户id -->  
+			<if test=" userId !=null and userId !='' ">userId=#{userId},</if>  
+			<!-- 不赞同人数 -->  
+			<if test=" disagreeNum !=null and disagreeNum !='' ">disagreeNum=#{disagreeNum},</if>  
+			<!-- 赞同人数 -->  
+			<if test=" agreeNum !=null and agreeNum !='' ">agreeNum=#{agreeNum},</if>  
+			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
+			<if test=" parentCommentId !=null and parentCommentId !='' ">parentCommentId=#{parentCommentId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

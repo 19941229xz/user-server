@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.CompanyDao">
+	<!-- 动态条件查询company -->
+	<select id="getAllCompany" parameterType="Company" resultType="Company">SELECT * FROM company
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 公司名称 -->  
+			<if test=" name !=null and name !='' ">and name=#{name}</if>  
+			<!-- 公司地址（关联地区表） -->  
+			<if test=" address !=null and address !='' ">and address=#{address}</if>  
+			<!-- 公司注册号 -->  
+			<if test=" regId !=null and regId !='' ">and regId=#{regId}</if>  
+			<!-- 公司注册日期 -->  
+			<if test=" regDate !=null and regDate !='' ">and regDate=#{regDate}</if>  
+			<!-- 公司类型(上市，未上市.....) -->  
+			<if test=" type !=null and type !='' ">and type=#{type}</if>  
+			<!-- 董事长id（对应职工表) -->  
+			<if test=" chairman !=null and chairman !='' ">and chairman=#{chairman}</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" ceo !=null and ceo !='' ">and ceo=#{ceo}</if>  
+			<!-- cbo id（对应职工表） -->  
+			<if test=" cbo !=null and cbo !='' ">and cbo=#{cbo}</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" cfo !=null and cfo !='' ">and cfo=#{cfo}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存company -->
+	<insert parameterType="Company" id="addCompany">INSERT INTO company
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 公司名称 -->  
+			<if test=" name !=null and name !='' ">name,</if>  
+			<!-- 公司地址（关联地区表） -->  
+			<if test=" address !=null and address !='' ">address,</if>  
+			<!-- 公司注册号 -->  
+			<if test=" regId !=null and regId !='' ">regId,</if>  
+			<!-- 公司注册日期 -->  
+			<if test=" regDate !=null and regDate !='' ">regDate,</if>  
+			<!-- 公司类型(上市，未上市.....) -->  
+			<if test=" type !=null and type !='' ">type,</if>  
+			<!-- 董事长id（对应职工表) -->  
+			<if test=" chairman !=null and chairman !='' ">chairman,</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" ceo !=null and ceo !='' ">ceo,</if>  
+			<!-- cbo id（对应职工表） -->  
+			<if test=" cbo !=null and cbo !='' ">cbo,</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" cfo !=null and cfo !='' ">cfo,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 公司名称 -->  
+			<if test=" name !=null and name !='' ">#{name},</if>  
+			<!-- 公司地址（关联地区表） -->  
+			<if test=" address !=null and address !='' ">#{address},</if>  
+			<!-- 公司注册号 -->  
+			<if test=" regId !=null and regId !='' ">#{regId},</if>  
+			<!-- 公司注册日期 -->  
+			<if test=" regDate !=null and regDate !='' ">#{regDate},</if>  
+			<!-- 公司类型(上市，未上市.....) -->  
+			<if test=" type !=null and type !='' ">#{type},</if>  
+			<!-- 董事长id（对应职工表) -->  
+			<if test=" chairman !=null and chairman !='' ">#{chairman},</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" ceo !=null and ceo !='' ">#{ceo},</if>  
+			<!-- cbo id（对应职工表） -->  
+			<if test=" cbo !=null and cbo !='' ">#{cbo},</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" cfo !=null and cfo !='' ">#{cfo},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新company -->
+	<update id="updateCompany" parameterType="Company">update company set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 公司名称 -->  
+			<if test=" name !=null and name !='' ">name=#{name},</if>  
+			<!-- 公司地址（关联地区表） -->  
+			<if test=" address !=null and address !='' ">address=#{address},</if>  
+			<!-- 公司注册号 -->  
+			<if test=" regId !=null and regId !='' ">regId=#{regId},</if>  
+			<!-- 公司注册日期 -->  
+			<if test=" regDate !=null and regDate !='' ">regDate=#{regDate},</if>  
+			<!-- 公司类型(上市，未上市.....) -->  
+			<if test=" type !=null and type !='' ">type=#{type},</if>  
+			<!-- 董事长id（对应职工表) -->  
+			<if test=" chairman !=null and chairman !='' ">chairman=#{chairman},</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" ceo !=null and ceo !='' ">ceo=#{ceo},</if>  
+			<!-- cbo id（对应职工表） -->  
+			<if test=" cbo !=null and cbo !='' ">cbo=#{cbo},</if>  
+			<!-- ceo id（对应职工表） -->  
+			<if test=" cfo !=null and cfo !='' ">cfo=#{cfo},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

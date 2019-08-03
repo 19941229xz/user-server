@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.FacultyDao">
+	<!-- 动态条件查询faculty -->
+	<select id="getAllFaculty" parameterType="Faculty" resultType="Faculty">SELECT * FROM faculty
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 院系名称 -->  
+			<if test=" name !=null and name !='' ">and name=#{name}</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schId !=null and schId !='' ">and schId=#{schId}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存faculty -->
+	<insert parameterType="Faculty" id="addFaculty">INSERT INTO faculty
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 院系名称 -->  
+			<if test=" name !=null and name !='' ">name,</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schId !=null and schId !='' ">schId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 院系名称 -->  
+			<if test=" name !=null and name !='' ">#{name},</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schId !=null and schId !='' ">#{schId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新faculty -->
+	<update id="updateFaculty" parameterType="Faculty">update faculty set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 院系名称 -->  
+			<if test=" name !=null and name !='' ">name=#{name},</if>  
+			<!-- 所属学校id（关联学校表） -->  
+			<if test=" schId !=null and schId !='' ">schId=#{schId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

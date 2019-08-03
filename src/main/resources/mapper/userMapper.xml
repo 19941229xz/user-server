@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.UserDao">
+	<!-- 动态条件查询user -->
+	<select id="getAllUser" parameterType="User" resultType="User">SELECT * FROM user
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 头像 -->  
+			<if test=" headImg !=null and headImg !='' ">and headImg=#{headImg}</if>  
+			<!-- 用户名 -->  
+			<if test=" userName !=null and userName !='' ">and userName=#{userName}</if>  
+			<!-- 密码 -->  
+			<if test=" password !=null and password !='' ">and password=#{password}</if>  
+			<!-- 昵称 -->  
+			<if test=" nickName !=null and nickName !='' ">and nickName=#{nickName}</if>  
+			<!-- 真实姓名 -->  
+			<if test=" realName !=null and realName !='' ">and realName=#{realName}</if>  
+			<!-- 性别 1男  2女 -->  
+			<if test=" gender !=null and gender !='' ">and gender=#{gender}</if>  
+			<!-- 生日 -->  
+			<if test=" birthday !=null and birthday !='' ">and birthday=#{birthday}</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">and age=#{age}</if>  
+			<!-- qq号 -->  
+			<if test=" qq !=null and qq !='' ">and qq=#{qq}</if>  
+			<!-- 微信号 -->  
+			<if test=" weChat !=null and weChat !='' ">and weChat=#{weChat}</if>  
+			<!-- 手机号 -->  
+			<if test=" phoneNum !=null and phoneNum !='' ">and phoneNum=#{phoneNum}</if>  
+			<!-- 邮箱 -->  
+			<if test=" email !=null and email !='' ">and email=#{email}</if>  
+			<!-- 注册ip -->  
+			<if test=" regIp !=null and regIp !='' ">and regIp=#{regIp}</if>  
+			<!-- 注册时间 -->  
+			<if test=" regTime !=null and regTime !='' ">and regTime=#{regTime}</if>  
+			<!-- （上一次）登出ip -->  
+			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">and lastLogoutIp=#{lastLogoutIp}</if>  
+			<!-- （本次）登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">and loginIp=#{loginIp}</if>  
+			<!-- 最后在线/登出时刻 -->  
+			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">and lastOnlineTime=#{lastOnlineTime}</if>  
+			<!-- （本次）登录时刻 -->  
+			<if test=" loginTime !=null and loginTime !='' ">and loginTime=#{loginTime}</if>  
+			<!-- 本次登录时长 -->  
+			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">and timeOfThisLogin=#{timeOfThisLogin}</if>  
+			<!-- 在线总时长 -->  
+			<if test=" totalOnlineTime !=null and totalOnlineTime !='' ">and totalOnlineTime=#{totalOnlineTime}</if>  
+			<!-- 用户身份id（1用户 2管理员） -->  
+			<if test=" roleId !=null and roleId !='' ">and roleId=#{roleId}</if>  
+			<!-- 会员id -->  
+			<if test=" memberId !=null and memberId !='' ">and memberId=#{memberId}</if>  
+			<!-- 收货地址id（关联地区表） -->  
+			<if test=" shippingAddress !=null and shippingAddress !='' ">and shippingAddress=#{shippingAddress}</if>  
+			<!-- 状态（1已激活、2未激活、3冻结、4已删除） -->  
+			<if test=" status !=null and status !='' ">and status=#{status}</if>  
+			<!-- 常用登录ip -->  
+			<if test=" commonLoginIp !=null and commonLoginIp !='' ">and commonLoginIp=#{commonLoginIp}</if>  
+			<!-- 支付密码 -->  
+			<if test=" payPassword !=null and payPassword !='' ">and payPassword=#{payPassword}</if>  
+			<!-- 用户签名 -->  
+			<if test=" signature !=null and signature !='' ">and signature=#{signature}</if>  
+			<!-- 用户地址 -->  
+			<if test=" userAddress !=null and userAddress !='' ">and userAddress=#{userAddress}</if>  
+			<!-- 学生id -->  
+			<if test=" studentId !=null and studentId !='' ">and studentId=#{studentId}</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">and companyId=#{companyId}</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">and schoolId=#{schoolId}</if>  
+			<!-- 学院id -->  
+			<if test=" facultyId !=null and facultyId !='' ">and facultyId=#{facultyId}</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">and banjiId=#{banjiId}</if>  
+			<!-- 教师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">and teacherId=#{teacherId}</if>  
+			<!-- 部门id -->  
+			<if test=" departmentId !=null and departmentId !='' ">and departmentId=#{departmentId}</if>  
+			<!-- 职工id -->  
+			<if test=" staffId !=null and staffId !='' ">and staffId=#{staffId}</if>  
+			<!-- 籍贯（关联地区表） -->  
+			<if test=" birthPlace !=null and birthPlace !='' ">and birthPlace=#{birthPlace}</if>  
+			<!-- 政治面貌（1党员 2团员 3其他） -->  
+			<if test=" politicalStatus !=null and politicalStatus !='' ">and politicalStatus=#{politicalStatus}</if>  
+			<!-- 宗教信仰（1基督教 2伊斯兰教 3佛教 4其他） -->  
+			<if test=" religion !=null and religion !='' ">and religion=#{religion}</if>  
+			<!-- 邀请码 -->  
+			<if test=" inviteCode !=null and inviteCode !='' ">and inviteCode=#{inviteCode}</if>  
+			<!-- 邀请人数 -->  
+			<if test=" inviteNum !=null and inviteNum !='' ">and inviteNum=#{inviteNum}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存user -->
+	<insert parameterType="User" id="addUser">INSERT INTO user
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 头像 -->  
+			<if test=" headImg !=null and headImg !='' ">headImg,</if>  
+			<!-- 用户名 -->  
+			<if test=" userName !=null and userName !='' ">userName,</if>  
+			<!-- 密码 -->  
+			<if test=" password !=null and password !='' ">password,</if>  
+			<!-- 昵称 -->  
+			<if test=" nickName !=null and nickName !='' ">nickName,</if>  
+			<!-- 真实姓名 -->  
+			<if test=" realName !=null and realName !='' ">realName,</if>  
+			<!-- 性别 1男  2女 -->  
+			<if test=" gender !=null and gender !='' ">gender,</if>  
+			<!-- 生日 -->  
+			<if test=" birthday !=null and birthday !='' ">birthday,</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">age,</if>  
+			<!-- qq号 -->  
+			<if test=" qq !=null and qq !='' ">qq,</if>  
+			<!-- 微信号 -->  
+			<if test=" weChat !=null and weChat !='' ">weChat,</if>  
+			<!-- 手机号 -->  
+			<if test=" phoneNum !=null and phoneNum !='' ">phoneNum,</if>  
+			<!-- 邮箱 -->  
+			<if test=" email !=null and email !='' ">email,</if>  
+			<!-- 注册ip -->  
+			<if test=" regIp !=null and regIp !='' ">regIp,</if>  
+			<!-- 注册时间 -->  
+			<if test=" regTime !=null and regTime !='' ">regTime,</if>  
+			<!-- （上一次）登出ip -->  
+			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">lastLogoutIp,</if>  
+			<!-- （本次）登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">loginIp,</if>  
+			<!-- 最后在线/登出时刻 -->  
+			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">lastOnlineTime,</if>  
+			<!-- （本次）登录时刻 -->  
+			<if test=" loginTime !=null and loginTime !='' ">loginTime,</if>  
+			<!-- 本次登录时长 -->  
+			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">timeOfThisLogin,</if>  
+			<!-- 在线总时长 -->  
+			<if test=" totalOnlineTime !=null and totalOnlineTime !='' ">totalOnlineTime,</if>  
+			<!-- 用户身份id（1用户 2管理员） -->  
+			<if test=" roleId !=null and roleId !='' ">roleId,</if>  
+			<!-- 会员id -->  
+			<if test=" memberId !=null and memberId !='' ">memberId,</if>  
+			<!-- 收货地址id（关联地区表） -->  
+			<if test=" shippingAddress !=null and shippingAddress !='' ">shippingAddress,</if>  
+			<!-- 状态（1已激活、2未激活、3冻结、4已删除） -->  
+			<if test=" status !=null and status !='' ">status,</if>  
+			<!-- 常用登录ip -->  
+			<if test=" commonLoginIp !=null and commonLoginIp !='' ">commonLoginIp,</if>  
+			<!-- 支付密码 -->  
+			<if test=" payPassword !=null and payPassword !='' ">payPassword,</if>  
+			<!-- 用户签名 -->  
+			<if test=" signature !=null and signature !='' ">signature,</if>  
+			<!-- 用户地址 -->  
+			<if test=" userAddress !=null and userAddress !='' ">userAddress,</if>  
+			<!-- 学生id -->  
+			<if test=" studentId !=null and studentId !='' ">studentId,</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">companyId,</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId,</if>  
+			<!-- 学院id -->  
+			<if test=" facultyId !=null and facultyId !='' ">facultyId,</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId,</if>  
+			<!-- 教师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">teacherId,</if>  
+			<!-- 部门id -->  
+			<if test=" departmentId !=null and departmentId !='' ">departmentId,</if>  
+			<!-- 职工id -->  
+			<if test=" staffId !=null and staffId !='' ">staffId,</if>  
+			<!-- 籍贯（关联地区表） -->  
+			<if test=" birthPlace !=null and birthPlace !='' ">birthPlace,</if>  
+			<!-- 政治面貌（1党员 2团员 3其他） -->  
+			<if test=" politicalStatus !=null and politicalStatus !='' ">politicalStatus,</if>  
+			<!-- 宗教信仰（1基督教 2伊斯兰教 3佛教 4其他） -->  
+			<if test=" religion !=null and religion !='' ">religion,</if>  
+			<!-- 邀请码 -->  
+			<if test=" inviteCode !=null and inviteCode !='' ">inviteCode,</if>  
+			<!-- 邀请人数 -->  
+			<if test=" inviteNum !=null and inviteNum !='' ">inviteNum,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 头像 -->  
+			<if test=" headImg !=null and headImg !='' ">#{headImg},</if>  
+			<!-- 用户名 -->  
+			<if test=" userName !=null and userName !='' ">#{userName},</if>  
+			<!-- 密码 -->  
+			<if test=" password !=null and password !='' ">#{password},</if>  
+			<!-- 昵称 -->  
+			<if test=" nickName !=null and nickName !='' ">#{nickName},</if>  
+			<!-- 真实姓名 -->  
+			<if test=" realName !=null and realName !='' ">#{realName},</if>  
+			<!-- 性别 1男  2女 -->  
+			<if test=" gender !=null and gender !='' ">#{gender},</if>  
+			<!-- 生日 -->  
+			<if test=" birthday !=null and birthday !='' ">#{birthday},</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">#{age},</if>  
+			<!-- qq号 -->  
+			<if test=" qq !=null and qq !='' ">#{qq},</if>  
+			<!-- 微信号 -->  
+			<if test=" weChat !=null and weChat !='' ">#{weChat},</if>  
+			<!-- 手机号 -->  
+			<if test=" phoneNum !=null and phoneNum !='' ">#{phoneNum},</if>  
+			<!-- 邮箱 -->  
+			<if test=" email !=null and email !='' ">#{email},</if>  
+			<!-- 注册ip -->  
+			<if test=" regIp !=null and regIp !='' ">#{regIp},</if>  
+			<!-- 注册时间 -->  
+			<if test=" regTime !=null and regTime !='' ">#{regTime},</if>  
+			<!-- （上一次）登出ip -->  
+			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">#{lastLogoutIp},</if>  
+			<!-- （本次）登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">#{loginIp},</if>  
+			<!-- 最后在线/登出时刻 -->  
+			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">#{lastOnlineTime},</if>  
+			<!-- （本次）登录时刻 -->  
+			<if test=" loginTime !=null and loginTime !='' ">#{loginTime},</if>  
+			<!-- 本次登录时长 -->  
+			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">#{timeOfThisLogin},</if>  
+			<!-- 在线总时长 -->  
+			<if test=" totalOnlineTime !=null and totalOnlineTime !='' ">#{totalOnlineTime},</if>  
+			<!-- 用户身份id（1用户 2管理员） -->  
+			<if test=" roleId !=null and roleId !='' ">#{roleId},</if>  
+			<!-- 会员id -->  
+			<if test=" memberId !=null and memberId !='' ">#{memberId},</if>  
+			<!-- 收货地址id（关联地区表） -->  
+			<if test=" shippingAddress !=null and shippingAddress !='' ">#{shippingAddress},</if>  
+			<!-- 状态（1已激活、2未激活、3冻结、4已删除） -->  
+			<if test=" status !=null and status !='' ">#{status},</if>  
+			<!-- 常用登录ip -->  
+			<if test=" commonLoginIp !=null and commonLoginIp !='' ">#{commonLoginIp},</if>  
+			<!-- 支付密码 -->  
+			<if test=" payPassword !=null and payPassword !='' ">#{payPassword},</if>  
+			<!-- 用户签名 -->  
+			<if test=" signature !=null and signature !='' ">#{signature},</if>  
+			<!-- 用户地址 -->  
+			<if test=" userAddress !=null and userAddress !='' ">#{userAddress},</if>  
+			<!-- 学生id -->  
+			<if test=" studentId !=null and studentId !='' ">#{studentId},</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">#{companyId},</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">#{schoolId},</if>  
+			<!-- 学院id -->  
+			<if test=" facultyId !=null and facultyId !='' ">#{facultyId},</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">#{banjiId},</if>  
+			<!-- 教师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">#{teacherId},</if>  
+			<!-- 部门id -->  
+			<if test=" departmentId !=null and departmentId !='' ">#{departmentId},</if>  
+			<!-- 职工id -->  
+			<if test=" staffId !=null and staffId !='' ">#{staffId},</if>  
+			<!-- 籍贯（关联地区表） -->  
+			<if test=" birthPlace !=null and birthPlace !='' ">#{birthPlace},</if>  
+			<!-- 政治面貌（1党员 2团员 3其他） -->  
+			<if test=" politicalStatus !=null and politicalStatus !='' ">#{politicalStatus},</if>  
+			<!-- 宗教信仰（1基督教 2伊斯兰教 3佛教 4其他） -->  
+			<if test=" religion !=null and religion !='' ">#{religion},</if>  
+			<!-- 邀请码 -->  
+			<if test=" inviteCode !=null and inviteCode !='' ">#{inviteCode},</if>  
+			<!-- 邀请人数 -->  
+			<if test=" inviteNum !=null and inviteNum !='' ">#{inviteNum},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新user -->
+	<update id="updateUser" parameterType="User">update user set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 头像 -->  
+			<if test=" headImg !=null and headImg !='' ">headImg=#{headImg},</if>  
+			<!-- 用户名 -->  
+			<if test=" userName !=null and userName !='' ">userName=#{userName},</if>  
+			<!-- 密码 -->  
+			<if test=" password !=null and password !='' ">password=#{password},</if>  
+			<!-- 昵称 -->  
+			<if test=" nickName !=null and nickName !='' ">nickName=#{nickName},</if>  
+			<!-- 真实姓名 -->  
+			<if test=" realName !=null and realName !='' ">realName=#{realName},</if>  
+			<!-- 性别 1男  2女 -->  
+			<if test=" gender !=null and gender !='' ">gender=#{gender},</if>  
+			<!-- 生日 -->  
+			<if test=" birthday !=null and birthday !='' ">birthday=#{birthday},</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">age=#{age},</if>  
+			<!-- qq号 -->  
+			<if test=" qq !=null and qq !='' ">qq=#{qq},</if>  
+			<!-- 微信号 -->  
+			<if test=" weChat !=null and weChat !='' ">weChat=#{weChat},</if>  
+			<!-- 手机号 -->  
+			<if test=" phoneNum !=null and phoneNum !='' ">phoneNum=#{phoneNum},</if>  
+			<!-- 邮箱 -->  
+			<if test=" email !=null and email !='' ">email=#{email},</if>  
+			<!-- 注册ip -->  
+			<if test=" regIp !=null and regIp !='' ">regIp=#{regIp},</if>  
+			<!-- 注册时间 -->  
+			<if test=" regTime !=null and regTime !='' ">regTime=#{regTime},</if>  
+			<!-- （上一次）登出ip -->  
+			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">lastLogoutIp=#{lastLogoutIp},</if>  
+			<!-- （本次）登录ip -->  
+			<if test=" loginIp !=null and loginIp !='' ">loginIp=#{loginIp},</if>  
+			<!-- 最后在线/登出时刻 -->  
+			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">lastOnlineTime=#{lastOnlineTime},</if>  
+			<!-- （本次）登录时刻 -->  
+			<if test=" loginTime !=null and loginTime !='' ">loginTime=#{loginTime},</if>  
+			<!-- 本次登录时长 -->  
+			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">timeOfThisLogin=#{timeOfThisLogin},</if>  
+			<!-- 在线总时长 -->  
+			<if test=" totalOnlineTime !=null and totalOnlineTime !='' ">totalOnlineTime=#{totalOnlineTime},</if>  
+			<!-- 用户身份id（1用户 2管理员） -->  
+			<if test=" roleId !=null and roleId !='' ">roleId=#{roleId},</if>  
+			<!-- 会员id -->  
+			<if test=" memberId !=null and memberId !='' ">memberId=#{memberId},</if>  
+			<!-- 收货地址id（关联地区表） -->  
+			<if test=" shippingAddress !=null and shippingAddress !='' ">shippingAddress=#{shippingAddress},</if>  
+			<!-- 状态（1已激活、2未激活、3冻结、4已删除） -->  
+			<if test=" status !=null and status !='' ">status=#{status},</if>  
+			<!-- 常用登录ip -->  
+			<if test=" commonLoginIp !=null and commonLoginIp !='' ">commonLoginIp=#{commonLoginIp},</if>  
+			<!-- 支付密码 -->  
+			<if test=" payPassword !=null and payPassword !='' ">payPassword=#{payPassword},</if>  
+			<!-- 用户签名 -->  
+			<if test=" signature !=null and signature !='' ">signature=#{signature},</if>  
+			<!-- 用户地址 -->  
+			<if test=" userAddress !=null and userAddress !='' ">userAddress=#{userAddress},</if>  
+			<!-- 学生id -->  
+			<if test=" studentId !=null and studentId !='' ">studentId=#{studentId},</if>  
+			<!-- 公司id -->  
+			<if test=" companyId !=null and companyId !='' ">companyId=#{companyId},</if>  
+			<!-- 学校id -->  
+			<if test=" schoolId !=null and schoolId !='' ">schoolId=#{schoolId},</if>  
+			<!-- 学院id -->  
+			<if test=" facultyId !=null and facultyId !='' ">facultyId=#{facultyId},</if>  
+			<!-- 班级id -->  
+			<if test=" banjiId !=null and banjiId !='' ">banjiId=#{banjiId},</if>  
+			<!-- 教师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">teacherId=#{teacherId},</if>  
+			<!-- 部门id -->  
+			<if test=" departmentId !=null and departmentId !='' ">departmentId=#{departmentId},</if>  
+			<!-- 职工id -->  
+			<if test=" staffId !=null and staffId !='' ">staffId=#{staffId},</if>  
+			<!-- 籍贯（关联地区表） -->  
+			<if test=" birthPlace !=null and birthPlace !='' ">birthPlace=#{birthPlace},</if>  
+			<!-- 政治面貌（1党员 2团员 3其他） -->  
+			<if test=" politicalStatus !=null and politicalStatus !='' ">politicalStatus=#{politicalStatus},</if>  
+			<!-- 宗教信仰（1基督教 2伊斯兰教 3佛教 4其他） -->  
+			<if test=" religion !=null and religion !='' ">religion=#{religion},</if>  
+			<!-- 邀请码 -->  
+			<if test=" inviteCode !=null and inviteCode !='' ">inviteCode=#{inviteCode},</if>  
+			<!-- 邀请人数 -->  
+			<if test=" inviteNum !=null and inviteNum !='' ">inviteNum=#{inviteNum},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

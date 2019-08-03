@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.TeacherDao">
+	<!-- 动态条件查询teacher -->
+	<select id="getAllTeacher" parameterType="Teacher" resultType="Teacher">SELECT * FROM teacher
+		<where> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 教师名字 -->  
+			<if test=" name !=null and name !='' ">and name=#{name}</if>  
+			<!-- 性别（1、男，2、女） -->  
+			<if test=" gender !=null and gender !='' ">and gender=#{gender}</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">and age=#{age}</if>  
+			<!-- 教龄 -->  
+			<if test=" teachingAge !=null and teachingAge !='' ">and teachingAge=#{teachingAge}</if>  
+			<!-- 教师职位id（关联教师职位表） -->  
+			<if test=" positionId !=null and positionId !='' ">and positionId=#{positionId}</if>  
+			<!-- 授课id（关联授课表） -->  
+			<if test=" teachId !=null and teachId !='' ">and teachId=#{teachId}</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">and facultyId=#{facultyId}</if>  
+			<!-- 所属公司id（关联公司表） -->  
+			<if test=" companyId !=null and companyId !='' ">and companyId=#{companyId}</if>  
+			<!-- 教师地址id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">and regionId=#{regionId}</if> 
+		</where> 
+	</select>
+	<!-- 动态保存teacher -->
+	<insert parameterType="Teacher" id="addTeacher">INSERT INTO teacher
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 教师名字 -->  
+			<if test=" name !=null and name !='' ">name,</if>  
+			<!-- 性别（1、男，2、女） -->  
+			<if test=" gender !=null and gender !='' ">gender,</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">age,</if>  
+			<!-- 教龄 -->  
+			<if test=" teachingAge !=null and teachingAge !='' ">teachingAge,</if>  
+			<!-- 教师职位id（关联教师职位表） -->  
+			<if test=" positionId !=null and positionId !='' ">positionId,</if>  
+			<!-- 授课id（关联授课表） -->  
+			<if test=" teachId !=null and teachId !='' ">teachId,</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">facultyId,</if>  
+			<!-- 所属公司id（关联公司表） -->  
+			<if test=" companyId !=null and companyId !='' ">companyId,</if>  
+			<!-- 教师地址id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">regionId,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 教师名字 -->  
+			<if test=" name !=null and name !='' ">#{name},</if>  
+			<!-- 性别（1、男，2、女） -->  
+			<if test=" gender !=null and gender !='' ">#{gender},</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">#{age},</if>  
+			<!-- 教龄 -->  
+			<if test=" teachingAge !=null and teachingAge !='' ">#{teachingAge},</if>  
+			<!-- 教师职位id（关联教师职位表） -->  
+			<if test=" positionId !=null and positionId !='' ">#{positionId},</if>  
+			<!-- 授课id（关联授课表） -->  
+			<if test=" teachId !=null and teachId !='' ">#{teachId},</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">#{facultyId},</if>  
+			<!-- 所属公司id（关联公司表） -->  
+			<if test=" companyId !=null and companyId !='' ">#{companyId},</if>  
+			<!-- 教师地址id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">#{regionId},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新teacher -->
+	<update id="updateTeacher" parameterType="Teacher">update teacher set 
+		<trim suffixOverrides=","> 
+			<!-- 主键id -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 教师名字 -->  
+			<if test=" name !=null and name !='' ">name=#{name},</if>  
+			<!-- 性别（1、男，2、女） -->  
+			<if test=" gender !=null and gender !='' ">gender=#{gender},</if>  
+			<!-- 年龄 -->  
+			<if test=" age !=null and age !='' ">age=#{age},</if>  
+			<!-- 教龄 -->  
+			<if test=" teachingAge !=null and teachingAge !='' ">teachingAge=#{teachingAge},</if>  
+			<!-- 教师职位id（关联教师职位表） -->  
+			<if test=" positionId !=null and positionId !='' ">positionId=#{positionId},</if>  
+			<!-- 授课id（关联授课表） -->  
+			<if test=" teachId !=null and teachId !='' ">teachId=#{teachId},</if>  
+			<!-- 所属院系id（关联院系表） -->  
+			<if test=" facultyId !=null and facultyId !='' ">facultyId=#{facultyId},</if>  
+			<!-- 所属公司id（关联公司表） -->  
+			<if test=" companyId !=null and companyId !='' ">companyId=#{companyId},</if>  
+			<!-- 教师地址id（关联地区表） -->  
+			<if test=" regionId !=null and regionId !='' ">regionId=#{regionId},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>
