@@ -52,5 +52,15 @@ public class CommentController {
         Comment comment=commentService.getCommentById(id);
         return comment!=null?MyRsp.success(comment):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
+    
+    @PostMapping("/batchDeleteCommentByIds")
+    public Object batchDeleteCommentByIds(@RequestBody int[] ids){
+	    int affectedNum=0;
+        for (int id:ids){
+            affectedNum+= (commentService.removeCommentById(id)?1:0);
+        }
+	    return affectedNum==ids.length?MyRsp.success(null).msg("批量删除成功"):
+                MyRsp.error().msg("批量删除失败");
+    }
 	
 }

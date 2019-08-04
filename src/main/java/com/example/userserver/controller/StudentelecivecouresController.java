@@ -52,5 +52,15 @@ public class StudentelecivecouresController {
         Studentelecivecoures studentelecivecoures=studentelecivecouresService.getStudentelecivecouresById(id);
         return studentelecivecoures!=null?MyRsp.success(studentelecivecoures):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
+    
+    @PostMapping("/batchDeleteStudentelecivecouresByIds")
+    public Object batchDeleteStudentelecivecouresByIds(@RequestBody int[] ids){
+	    int affectedNum=0;
+        for (int id:ids){
+            affectedNum+= (studentelecivecouresService.removeStudentelecivecouresById(id)?1:0);
+        }
+	    return affectedNum==ids.length?MyRsp.success(null).msg("批量删除成功"):
+                MyRsp.error().msg("批量删除失败");
+    }
 	
 }

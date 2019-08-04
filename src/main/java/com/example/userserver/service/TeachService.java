@@ -19,6 +19,4 @@ public interface TeachService {
     public Teach getTeachById(int id);
 
 
-
-
 }

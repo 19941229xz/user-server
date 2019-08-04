@@ -19,6 +19,4 @@ public interface UserService {
     public User getUserById(int id);
 
 
-
-
 }

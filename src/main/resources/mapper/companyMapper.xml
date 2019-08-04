@@ -14,7 +14,7 @@
 			<!-- 公司注册号 -->  
 			<if test=" regId !=null and regId !='' ">and regId=#{regId}</if>  
 			<!-- 公司注册日期 -->  
-			<if test=" regDate !=null and regDate !='' ">and regDate=#{regDate}</if>  
+			<if test=" regDate !=null ">and regDate=#{regDate}</if>  
 			<!-- 公司类型(上市，未上市.....) -->  
 			<if test=" type !=null and type !='' ">and type=#{type}</if>  
 			<!-- 董事长id（对应职工表) -->  
@@ -39,7 +39,7 @@
 			<!-- 公司注册号 -->  
 			<if test=" regId !=null and regId !='' ">regId,</if>  
 			<!-- 公司注册日期 -->  
-			<if test=" regDate !=null and regDate !='' ">regDate,</if>  
+			<if test=" regDate !=null ">regDate,</if>  
 			<!-- 公司类型(上市，未上市.....) -->  
 			<if test=" type !=null and type !='' ">type,</if>  
 			<!-- 董事长id（对应职工表) -->  
@@ -61,7 +61,7 @@
 			<!-- 公司注册号 -->  
 			<if test=" regId !=null and regId !='' ">#{regId},</if>  
 			<!-- 公司注册日期 -->  
-			<if test=" regDate !=null and regDate !='' ">#{regDate},</if>  
+			<if test=" regDate !=null ">#{regDate},</if>  
 			<!-- 公司类型(上市，未上市.....) -->  
 			<if test=" type !=null and type !='' ">#{type},</if>  
 			<!-- 董事长id（对应职工表) -->  
@@ -87,7 +87,7 @@
 			<!-- 公司注册号 -->  
 			<if test=" regId !=null and regId !='' ">regId=#{regId},</if>  
 			<!-- 公司注册日期 -->  
-			<if test=" regDate !=null and regDate !='' ">regDate=#{regDate},</if>  
+			<if test=" regDate !=null ">regDate=#{regDate},</if>  
 			<!-- 公司类型(上市，未上市.....) -->  
 			<if test=" type !=null and type !='' ">type=#{type},</if>  
 			<!-- 董事长id（对应职工表) -->  

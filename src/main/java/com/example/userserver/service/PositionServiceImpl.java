@@ -75,8 +75,7 @@ public class PositionServiceImpl implements PositionService {
     	return positionDao.getPositionById(id);
     	
     }
-
-
-
+    
+    
 
 }

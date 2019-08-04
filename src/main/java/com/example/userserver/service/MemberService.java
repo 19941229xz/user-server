@@ -19,6 +19,4 @@ public interface MemberService {
     public Member getMemberById(int id);
 
 
-
-
 }

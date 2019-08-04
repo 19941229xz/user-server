@@ -75,8 +75,7 @@ public class StudentelecivecouresServiceImpl implements StudentelecivecouresServ
     	return studentelecivecouresDao.getStudentelecivecouresById(id);
     	
     }
-
-
-
+    
+    
 
 }

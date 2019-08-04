@@ -75,8 +75,7 @@ public class FacultyServiceImpl implements FacultyService {
     	return facultyDao.getFacultyById(id);
     	
     }
-
-
-
+    
+    
 
 }

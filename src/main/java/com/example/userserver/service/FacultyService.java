@@ -19,6 +19,4 @@ public interface FacultyService {
     public Faculty getFacultyById(int id);
 
 
-
-
 }

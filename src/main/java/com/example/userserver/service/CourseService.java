@@ -19,6 +19,4 @@ public interface CourseService {
     public Course getCourseById(int id);
 
 
-
-
 }

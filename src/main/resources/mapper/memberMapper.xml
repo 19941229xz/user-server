@@ -12,9 +12,9 @@
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">and points=#{points}</if>  
 			<!-- 注册会员时间 -->  
-			<if test=" regTime !=null and regTime !='' ">and regTime=#{regTime}</if>  
+			<if test=" regTime !=null ">and regTime=#{regTime}</if>  
 			<!-- 会员到期时间 -->  
-			<if test=" deadLine !=null and deadLine !='' ">and deadLine=#{deadLine}</if> 
+			<if test=" deadLine !=null ">and deadLine=#{deadLine}</if> 
 		</where> 
 	</select>
 	<!-- 动态保存member -->
@@ -27,9 +27,9 @@
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">points,</if>  
 			<!-- 注册会员时间 -->  
-			<if test=" regTime !=null and regTime !='' ">regTime,</if>  
+			<if test=" regTime !=null ">regTime,</if>  
 			<!-- 会员到期时间 -->  
-			<if test=" deadLine !=null and deadLine !='' ">deadLine,</if> 
+			<if test=" deadLine !=null ">deadLine,</if> 
 		</trim>  
 		<trim prefix="values(" suffix=")" suffixOverrides=","> 
 			<!-- 主键id -->  
@@ -39,9 +39,9 @@
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">#{points},</if>  
 			<!-- 注册会员时间 -->  
-			<if test=" regTime !=null and regTime !='' ">#{regTime},</if>  
+			<if test=" regTime !=null ">#{regTime},</if>  
 			<!-- 会员到期时间 -->  
-			<if test=" deadLine !=null and deadLine !='' ">#{deadLine},</if> 
+			<if test=" deadLine !=null ">#{deadLine},</if> 
 		</trim>  
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
 	</insert>
@@ -55,9 +55,9 @@
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">points=#{points},</if>  
 			<!-- 注册会员时间 -->  
-			<if test=" regTime !=null and regTime !='' ">regTime=#{regTime},</if>  
+			<if test=" regTime !=null ">regTime=#{regTime},</if>  
 			<!-- 会员到期时间 -->  
-			<if test=" deadLine !=null and deadLine !='' ">deadLine=#{deadLine},</if> 
+			<if test=" deadLine !=null ">deadLine=#{deadLine},</if> 
 		</trim> WHERE id = #{id}
 	</update>
 </mapper>

@@ -75,8 +75,7 @@ public class CompanyServiceImpl implements CompanyService {
     	return companyDao.getCompanyById(id);
     	
     }
-
-
-
+    
+    
 
 }

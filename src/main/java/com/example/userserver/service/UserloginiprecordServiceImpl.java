@@ -75,8 +75,7 @@ public class UserloginiprecordServiceImpl implements UserloginiprecordService {
     	return userloginiprecordDao.getUserloginiprecordById(id);
     	
     }
-
-
-
+    
+    
 
 }

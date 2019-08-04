@@ -19,6 +19,4 @@ public interface CompanyService {
     public Company getCompanyById(int id);
 
 
-
-
 }

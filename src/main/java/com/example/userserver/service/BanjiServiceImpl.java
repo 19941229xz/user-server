@@ -75,8 +75,7 @@ public class BanjiServiceImpl implements BanjiService {
     	return banjiDao.getBanjiById(id);
     	
     }
-
-
-
+    
+    
 
 }

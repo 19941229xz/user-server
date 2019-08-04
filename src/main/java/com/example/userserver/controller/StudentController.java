@@ -52,5 +52,15 @@ public class StudentController {
         Student student=studentService.getStudentById(id);
         return student!=null?MyRsp.success(student):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
+    
+    @PostMapping("/batchDeleteStudentByIds")
+    public Object batchDeleteStudentByIds(@RequestBody int[] ids){
+	    int affectedNum=0;
+        for (int id:ids){
+            affectedNum+= (studentService.removeStudentById(id)?1:0);
+        }
+	    return affectedNum==ids.length?MyRsp.success(null).msg("批量删除成功"):
+                MyRsp.error().msg("批量删除失败");
+    }
 	
 }

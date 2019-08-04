@@ -75,8 +75,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     	return departmentDao.getDepartmentById(id);
     	
     }
-
-
-
+    
+    
 
 }

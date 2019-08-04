@@ -19,6 +19,4 @@ public interface UserloginiprecordService {
     public Userloginiprecord getUserloginiprecordById(int id);
 
 
-
-
 }

@@ -19,6 +19,4 @@ public interface EmailaddressmanagementService {
     public Emailaddressmanagement getEmailaddressmanagementById(int id);
 
 
-
-
 }

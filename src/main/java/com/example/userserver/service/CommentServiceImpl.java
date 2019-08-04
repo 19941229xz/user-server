@@ -75,8 +75,7 @@ public class CommentServiceImpl implements CommentService {
     	return commentDao.getCommentById(id);
     	
     }
-
-
-
+    
+    
 
 }

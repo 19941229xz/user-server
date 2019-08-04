@@ -75,8 +75,7 @@ public class TeachServiceImpl implements TeachService {
     	return teachDao.getTeachById(id);
     	
     }
-
-
-
+    
+    
 
 }

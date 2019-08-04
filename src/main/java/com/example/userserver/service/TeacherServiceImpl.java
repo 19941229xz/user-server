@@ -75,8 +75,7 @@ public class TeacherServiceImpl implements TeacherService {
     	return teacherDao.getTeacherById(id);
     	
     }
-
-
-
+    
+    
 
 }

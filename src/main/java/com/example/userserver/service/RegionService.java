@@ -19,6 +19,4 @@ public interface RegionService {
     public Region getRegionById(int id);
 
 
-
-
 }

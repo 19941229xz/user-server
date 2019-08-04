@@ -19,6 +19,4 @@ public interface BanjiService {
     public Banji getBanjiById(int id);
 
 
-
-
 }

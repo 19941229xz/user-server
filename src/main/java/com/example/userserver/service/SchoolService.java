@@ -19,6 +19,4 @@ public interface SchoolService {
     public School getSchoolById(int id);
 
 
-
-
 }

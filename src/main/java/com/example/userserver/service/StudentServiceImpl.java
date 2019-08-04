@@ -75,8 +75,7 @@ public class StudentServiceImpl implements StudentService {
     	return studentDao.getStudentById(id);
     	
     }
-
-
-
+    
+    
 
 }

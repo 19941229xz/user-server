@@ -52,5 +52,15 @@ public class PositionController {
         Position position=positionService.getPositionById(id);
         return position!=null?MyRsp.success(position):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
+    
+    @PostMapping("/batchDeletePositionByIds")
+    public Object batchDeletePositionByIds(@RequestBody int[] ids){
+	    int affectedNum=0;
+        for (int id:ids){
+            affectedNum+= (positionService.removePositionById(id)?1:0);
+        }
+	    return affectedNum==ids.length?MyRsp.success(null).msg("批量删除成功"):
+                MyRsp.error().msg("批量删除失败");
+    }
 	
 }

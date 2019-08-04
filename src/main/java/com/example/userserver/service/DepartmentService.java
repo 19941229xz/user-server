@@ -19,6 +19,4 @@ public interface DepartmentService {
     public Department getDepartmentById(int id);
 
 
-
-
 }

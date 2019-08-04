@@ -52,5 +52,15 @@ public class TeachController {
         Teach teach=teachService.getTeachById(id);
         return teach!=null?MyRsp.success(teach):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
+    
+    @PostMapping("/batchDeleteTeachByIds")
+    public Object batchDeleteTeachByIds(@RequestBody int[] ids){
+	    int affectedNum=0;
+        for (int id:ids){
+            affectedNum+= (teachService.removeTeachById(id)?1:0);
+        }
+	    return affectedNum==ids.length?MyRsp.success(null).msg("批量删除成功"):
+                MyRsp.error().msg("批量删除失败");
+    }
 	
 }

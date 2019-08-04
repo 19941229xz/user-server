@@ -19,6 +19,4 @@ public interface StaffService {
     public Staff getStaffById(int id);
 
 
-
-
 }

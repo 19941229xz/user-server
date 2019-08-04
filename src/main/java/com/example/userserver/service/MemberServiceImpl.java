@@ -75,8 +75,7 @@ public class MemberServiceImpl implements MemberService {
     	return memberDao.getMemberById(id);
     	
     }
-
-
-
+    
+    
 
 }

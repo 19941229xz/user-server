@@ -19,6 +19,4 @@ public interface PositionService {
     public Position getPositionById(int id);
 
 
-
-
 }

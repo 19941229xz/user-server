@@ -19,6 +19,4 @@ public interface StudentelecivecouresService {
     public Studentelecivecoures getStudentelecivecouresById(int id);
 
 
-
-
 }

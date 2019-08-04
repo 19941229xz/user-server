@@ -20,7 +20,7 @@
 			<!-- 性别 1男  2女 -->  
 			<if test=" gender !=null and gender !='' ">and gender=#{gender}</if>  
 			<!-- 生日 -->  
-			<if test=" birthday !=null and birthday !='' ">and birthday=#{birthday}</if>  
+			<if test=" birthday !=null ">and birthday=#{birthday}</if>  
 			<!-- 年龄 -->  
 			<if test=" age !=null and age !='' ">and age=#{age}</if>  
 			<!-- qq号 -->  
@@ -34,15 +34,15 @@
 			<!-- 注册ip -->  
 			<if test=" regIp !=null and regIp !='' ">and regIp=#{regIp}</if>  
 			<!-- 注册时间 -->  
-			<if test=" regTime !=null and regTime !='' ">and regTime=#{regTime}</if>  
+			<if test=" regTime !=null ">and regTime=#{regTime}</if>  
 			<!-- （上一次）登出ip -->  
 			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">and lastLogoutIp=#{lastLogoutIp}</if>  
 			<!-- （本次）登录ip -->  
 			<if test=" loginIp !=null and loginIp !='' ">and loginIp=#{loginIp}</if>  
 			<!-- 最后在线/登出时刻 -->  
-			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">and lastOnlineTime=#{lastOnlineTime}</if>  
+			<if test=" lastOnlineTime !=null ">and lastOnlineTime=#{lastOnlineTime}</if>  
 			<!-- （本次）登录时刻 -->  
-			<if test=" loginTime !=null and loginTime !='' ">and loginTime=#{loginTime}</if>  
+			<if test=" loginTime !=null ">and loginTime=#{loginTime}</if>  
 			<!-- 本次登录时长 -->  
 			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">and timeOfThisLogin=#{timeOfThisLogin}</if>  
 			<!-- 在线总时长 -->  
@@ -109,7 +109,7 @@
 			<!-- 性别 1男  2女 -->  
 			<if test=" gender !=null and gender !='' ">gender,</if>  
 			<!-- 生日 -->  
-			<if test=" birthday !=null and birthday !='' ">birthday,</if>  
+			<if test=" birthday !=null ">birthday,</if>  
 			<!-- 年龄 -->  
 			<if test=" age !=null and age !='' ">age,</if>  
 			<!-- qq号 -->  
@@ -123,15 +123,15 @@
 			<!-- 注册ip -->  
 			<if test=" regIp !=null and regIp !='' ">regIp,</if>  
 			<!-- 注册时间 -->  
-			<if test=" regTime !=null and regTime !='' ">regTime,</if>  
+			<if test=" regTime !=null ">regTime,</if>  
 			<!-- （上一次）登出ip -->  
 			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">lastLogoutIp,</if>  
 			<!-- （本次）登录ip -->  
 			<if test=" loginIp !=null and loginIp !='' ">loginIp,</if>  
 			<!-- 最后在线/登出时刻 -->  
-			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">lastOnlineTime,</if>  
+			<if test=" lastOnlineTime !=null ">lastOnlineTime,</if>  
 			<!-- （本次）登录时刻 -->  
-			<if test=" loginTime !=null and loginTime !='' ">loginTime,</if>  
+			<if test=" loginTime !=null ">loginTime,</if>  
 			<!-- 本次登录时长 -->  
 			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">timeOfThisLogin,</if>  
 			<!-- 在线总时长 -->  
@@ -195,7 +195,7 @@
 			<!-- 性别 1男  2女 -->  
 			<if test=" gender !=null and gender !='' ">#{gender},</if>  
 			<!-- 生日 -->  
-			<if test=" birthday !=null and birthday !='' ">#{birthday},</if>  
+			<if test=" birthday !=null ">#{birthday},</if>  
 			<!-- 年龄 -->  
 			<if test=" age !=null and age !='' ">#{age},</if>  
 			<!-- qq号 -->  
@@ -209,15 +209,15 @@
 			<!-- 注册ip -->  
 			<if test=" regIp !=null and regIp !='' ">#{regIp},</if>  
 			<!-- 注册时间 -->  
-			<if test=" regTime !=null and regTime !='' ">#{regTime},</if>  
+			<if test=" regTime !=null ">#{regTime},</if>  
 			<!-- （上一次）登出ip -->  
 			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">#{lastLogoutIp},</if>  
 			<!-- （本次）登录ip -->  
 			<if test=" loginIp !=null and loginIp !='' ">#{loginIp},</if>  
 			<!-- 最后在线/登出时刻 -->  
-			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">#{lastOnlineTime},</if>  
+			<if test=" lastOnlineTime !=null ">#{lastOnlineTime},</if>  
 			<!-- （本次）登录时刻 -->  
-			<if test=" loginTime !=null and loginTime !='' ">#{loginTime},</if>  
+			<if test=" loginTime !=null ">#{loginTime},</if>  
 			<!-- 本次登录时长 -->  
 			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">#{timeOfThisLogin},</if>  
 			<!-- 在线总时长 -->  
@@ -285,7 +285,7 @@
 			<!-- 性别 1男  2女 -->  
 			<if test=" gender !=null and gender !='' ">gender=#{gender},</if>  
 			<!-- 生日 -->  
-			<if test=" birthday !=null and birthday !='' ">birthday=#{birthday},</if>  
+			<if test=" birthday !=null ">birthday=#{birthday},</if>  
 			<!-- 年龄 -->  
 			<if test=" age !=null and age !='' ">age=#{age},</if>  
 			<!-- qq号 -->  
@@ -299,15 +299,15 @@
 			<!-- 注册ip -->  
 			<if test=" regIp !=null and regIp !='' ">regIp=#{regIp},</if>  
 			<!-- 注册时间 -->  
-			<if test=" regTime !=null and regTime !='' ">regTime=#{regTime},</if>  
+			<if test=" regTime !=null ">regTime=#{regTime},</if>  
 			<!-- （上一次）登出ip -->  
 			<if test=" lastLogoutIp !=null and lastLogoutIp !='' ">lastLogoutIp=#{lastLogoutIp},</if>  
 			<!-- （本次）登录ip -->  
 			<if test=" loginIp !=null and loginIp !='' ">loginIp=#{loginIp},</if>  
 			<!-- 最后在线/登出时刻 -->  
-			<if test=" lastOnlineTime !=null and lastOnlineTime !='' ">lastOnlineTime=#{lastOnlineTime},</if>  
+			<if test=" lastOnlineTime !=null ">lastOnlineTime=#{lastOnlineTime},</if>  
 			<!-- （本次）登录时刻 -->  
-			<if test=" loginTime !=null and loginTime !='' ">loginTime=#{loginTime},</if>  
+			<if test=" loginTime !=null ">loginTime=#{loginTime},</if>  
 			<!-- 本次登录时长 -->  
 			<if test=" timeOfThisLogin !=null and timeOfThisLogin !='' ">timeOfThisLogin=#{timeOfThisLogin},</if>  
 			<!-- 在线总时长 -->  

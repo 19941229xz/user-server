@@ -19,6 +19,4 @@ public interface CommentService {
     public Comment getCommentById(int id);
 
 
-
-
 }

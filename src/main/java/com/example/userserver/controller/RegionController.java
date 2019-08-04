@@ -52,5 +52,15 @@ public class RegionController {
         Region region=regionService.getRegionById(id);
         return region!=null?MyRsp.success(region):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
+    
+    @PostMapping("/batchDeleteRegionByIds")
+    public Object batchDeleteRegionByIds(@RequestBody int[] ids){
+	    int affectedNum=0;
+        for (int id:ids){
+            affectedNum+= (regionService.removeRegionById(id)?1:0);
+        }
+	    return affectedNum==ids.length?MyRsp.success(null).msg("批量删除成功"):
+                MyRsp.error().msg("批量删除失败");
+    }
 	
 }

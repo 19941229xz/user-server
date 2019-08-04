@@ -75,8 +75,7 @@ public class SchoolServiceImpl implements SchoolService {
     	return schoolDao.getSchoolById(id);
     	
     }
-
-
-
+    
+    
 
 }
