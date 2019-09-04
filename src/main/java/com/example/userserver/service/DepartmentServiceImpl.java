@@ -31,16 +31,31 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional(readOnly = true)
 	public Object getAllDepartment(PageParam<Department> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Department> departmentList=departmentDao.getAllDepartment(pageParam.getModel());
+            PageInfo<Department> departmentPageInfo = new PageInfo<Department>(departmentList);
+    
+            return departmentPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Department> departmentList=departmentDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Department> departmentPageInfo = new PageInfo<Department>(departmentList);
+    
+            return departmentPageInfo;
         }
-
-
-        List<Department> departmentList=departmentDao.getAllDepartment(pageParam.getModel());
-        PageInfo<Department> departmentPageInfo = new PageInfo<Department>(departmentList);
-
-        return departmentPageInfo;
+    
+    	
     
     }
 

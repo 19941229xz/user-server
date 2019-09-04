@@ -24,6 +24,6 @@ public interface EmailaddressmanagementDao {
     Emailaddressmanagement getEmailaddressmanagementByEmailaddressmanagementName(String emailaddressmanagementName);
 
 
-
+	List<Emailaddressmanagement> superSearch(String superSearchKeyWord);
 
 }

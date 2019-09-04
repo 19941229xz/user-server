@@ -24,6 +24,6 @@ public interface StaffDao {
     Staff getStaffByStaffName(String staffName);
 
 
-
+	List<Staff> superSearch(String superSearchKeyWord);
 
 }

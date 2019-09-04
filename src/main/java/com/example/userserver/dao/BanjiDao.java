@@ -24,6 +24,6 @@ public interface BanjiDao {
     Banji getBanjiByBanjiName(String banjiName);
 
 
-
+	List<Banji> superSearch(String superSearchKeyWord);
 
 }

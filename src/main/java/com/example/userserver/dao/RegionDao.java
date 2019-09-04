@@ -24,6 +24,6 @@ public interface RegionDao {
     Region getRegionByRegionName(String regionName);
 
 
-
+	List<Region> superSearch(String superSearchKeyWord);
 
 }

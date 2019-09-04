@@ -24,13 +24,21 @@ public class BanjiController {
     public Object getAllBanji(@RequestBody PageParam<Banji> pageParam){
         return MyRsp.success(banjiService.getAllBanji(pageParam)).msg("查询成功");
     }
+    
+    @ApiOperation("按照关键字高级检索所有班级 支持分页和排序")
+    @PostMapping("/superSearchBanji")
+    public Object superSearch(@RequestBody PageParam<Banji> pageParam){
+        return MyRsp.success(banjiService.getAllBanji(pageParam)).msg("检索成功");
+    }
 
+	@ApiOperation("通过id删除班级，同时会清空redis缓存")
     @GetMapping("/removeBanjiById/{id}")
     public Object removeBanjiByBanjiName(@PathVariable("id") int id){
 
         return banjiService.removeBanjiById(id)?MyRsp.success(null).msg("删除成功"):MyRsp.error().msg("删除失败");
     }
 
+	@ApiOperation("添加{table.comment}，成功会将该数据放入redis缓存")
     @PostMapping("/addBanji")
     public Object addBanji(@RequestBody @Valid Banji banjiParam){
         Banji banji=(Banji)banjiService.addBanji(banjiParam);
@@ -39,13 +47,14 @@ public class BanjiController {
                 msg("添加成功"):MyRsp.error().msg("添加失败");
     }
 
-
+	@ApiOperation("修改{table.comment}，成功会将清除该数据的redis缓存")
     @PutMapping("/updateBanji")
     public Object updateBanji(@RequestBody@Valid Banji banji){
         return banjiService.updateBanji(banji)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }
 
+	@ApiOperation("通过id获取{table.comment}，优先从redis缓存中查")
     @GetMapping("/getBanjiById/{id}")
     public Object getBanjiById(@PathVariable("id") int id){
 
@@ -53,6 +62,7 @@ public class BanjiController {
         return banji!=null?MyRsp.success(banji):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
     
+    @ApiOperation("通过id数组批量删除{table.comment}，删除成功也会清空redis缓存数据")
     @PostMapping("/batchDeleteBanjiByIds")
     public Object batchDeleteBanjiByIds(@RequestBody int[] ids){
 	    int affectedNum=0;

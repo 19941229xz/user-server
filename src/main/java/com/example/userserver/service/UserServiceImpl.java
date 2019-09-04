@@ -31,16 +31,31 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
 	public Object getAllUser(PageParam<User> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<User> userList=userDao.getAllUser(pageParam.getModel());
+            PageInfo<User> userPageInfo = new PageInfo<User>(userList);
+    
+            return userPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<User> userList=userDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<User> userPageInfo = new PageInfo<User>(userList);
+    
+            return userPageInfo;
         }
-
-
-        List<User> userList=userDao.getAllUser(pageParam.getModel());
-        PageInfo<User> userPageInfo = new PageInfo<User>(userList);
-
-        return userPageInfo;
+    
+    	
     
     }
 

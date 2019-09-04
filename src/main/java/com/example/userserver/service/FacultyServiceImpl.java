@@ -31,16 +31,31 @@ public class FacultyServiceImpl implements FacultyService {
     @Transactional(readOnly = true)
 	public Object getAllFaculty(PageParam<Faculty> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Faculty> facultyList=facultyDao.getAllFaculty(pageParam.getModel());
+            PageInfo<Faculty> facultyPageInfo = new PageInfo<Faculty>(facultyList);
+    
+            return facultyPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Faculty> facultyList=facultyDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Faculty> facultyPageInfo = new PageInfo<Faculty>(facultyList);
+    
+            return facultyPageInfo;
         }
-
-
-        List<Faculty> facultyList=facultyDao.getAllFaculty(pageParam.getModel());
-        PageInfo<Faculty> facultyPageInfo = new PageInfo<Faculty>(facultyList);
-
-        return facultyPageInfo;
+    
+    	
     
     }
 

@@ -31,16 +31,31 @@ public class TeachServiceImpl implements TeachService {
     @Transactional(readOnly = true)
 	public Object getAllTeach(PageParam<Teach> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Teach> teachList=teachDao.getAllTeach(pageParam.getModel());
+            PageInfo<Teach> teachPageInfo = new PageInfo<Teach>(teachList);
+    
+            return teachPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Teach> teachList=teachDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Teach> teachPageInfo = new PageInfo<Teach>(teachList);
+    
+            return teachPageInfo;
         }
-
-
-        List<Teach> teachList=teachDao.getAllTeach(pageParam.getModel());
-        PageInfo<Teach> teachPageInfo = new PageInfo<Teach>(teachList);
-
-        return teachPageInfo;
+    
+    	
     
     }
 

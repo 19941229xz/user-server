@@ -39,5 +39,29 @@ public class Comment implements Serializable {
 	// 父评论id（对应主键id，-1表示没有父评论）
     @ApiModelProperty(value = "父评论id（对应主键id，-1表示没有父评论）" ,name = "parentCommentId")
 	private Integer parentCommentId;
+	// 评论时间
+    @ApiModelProperty(value = "评论时间" ,name = "createDate")
+	private Date createDate;
+	// 评论用户账号
+    @ApiModelProperty(value = "评论用户账号" ,name = "userName")
+	private String userName;
+	// 评论人昵称
+    @ApiModelProperty(value = "评论人昵称" ,name = "userNickName")
+	private String userNickName;
+	// 评论人真实姓名
+    @ApiModelProperty(value = "评论人真实姓名" ,name = "userRealName")
+	private String userRealName;
+	// 评论人头像
+    @ApiModelProperty(value = "评论人头像" ,name = "userHeadPic")
+	private String userHeadPic;
+	// 相关课程id
+    @ApiModelProperty(value = "相关课程id" ,name = "relativeCourseId")
+	private Integer relativeCourseId;
+	// 相关问题id
+    @ApiModelProperty(value = "相关问题id" ,name = "relativeQuestionId")
+	private Integer relativeQuestionId;
+	// 相关试卷id
+    @ApiModelProperty(value = "相关试卷id" ,name = "relativeExampaperId")
+	private Integer relativeExampaperId;
 
 }

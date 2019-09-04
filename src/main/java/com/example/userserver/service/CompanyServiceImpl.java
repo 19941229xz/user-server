@@ -31,16 +31,31 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional(readOnly = true)
 	public Object getAllCompany(PageParam<Company> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Company> companyList=companyDao.getAllCompany(pageParam.getModel());
+            PageInfo<Company> companyPageInfo = new PageInfo<Company>(companyList);
+    
+            return companyPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Company> companyList=companyDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Company> companyPageInfo = new PageInfo<Company>(companyList);
+    
+            return companyPageInfo;
         }
-
-
-        List<Company> companyList=companyDao.getAllCompany(pageParam.getModel());
-        PageInfo<Company> companyPageInfo = new PageInfo<Company>(companyList);
-
-        return companyPageInfo;
+    
+    	
     
     }
 

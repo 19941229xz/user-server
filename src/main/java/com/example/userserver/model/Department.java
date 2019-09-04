@@ -18,9 +18,9 @@ public class Department implements Serializable {
 	// 部门名称
     @ApiModelProperty(value = "部门名称" ,name = "name")
 	private String name;
-	// 部门负责人（对应职工表）
-    @ApiModelProperty(value = "部门负责人（对应职工表）" ,name = "principal")
-	private Integer principal;
+	// 部门负责人id（对应职工表）
+    @ApiModelProperty(value = "部门负责人id（对应职工表）" ,name = "principalId")
+	private Integer principalId;
 	// 员工人数
     @ApiModelProperty(value = "员工人数" ,name = "numOfStaff")
 	private Integer numOfStaff;

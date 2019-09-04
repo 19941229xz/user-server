@@ -24,6 +24,6 @@ public interface CompanyDao {
     Company getCompanyByCompanyName(String companyName);
 
 
-
+	List<Company> superSearch(String superSearchKeyWord);
 
 }

@@ -24,6 +24,6 @@ public interface FacultyDao {
     Faculty getFacultyByFacultyName(String facultyName);
 
 
-
+	List<Faculty> superSearch(String superSearchKeyWord);
 
 }

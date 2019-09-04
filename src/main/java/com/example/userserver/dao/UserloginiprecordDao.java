@@ -24,6 +24,6 @@ public interface UserloginiprecordDao {
     Userloginiprecord getUserloginiprecordByUserloginiprecordName(String userloginiprecordName);
 
 
-
+	List<Userloginiprecord> superSearch(String superSearchKeyWord);
 
 }

@@ -31,16 +31,31 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(readOnly = true)
 	public Object getAllMember(PageParam<Member> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Member> memberList=memberDao.getAllMember(pageParam.getModel());
+            PageInfo<Member> memberPageInfo = new PageInfo<Member>(memberList);
+    
+            return memberPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Member> memberList=memberDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Member> memberPageInfo = new PageInfo<Member>(memberList);
+    
+            return memberPageInfo;
         }
-
-
-        List<Member> memberList=memberDao.getAllMember(pageParam.getModel());
-        PageInfo<Member> memberPageInfo = new PageInfo<Member>(memberList);
-
-        return memberPageInfo;
+    
+    	
     
     }
 

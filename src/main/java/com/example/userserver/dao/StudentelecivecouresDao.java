@@ -24,6 +24,6 @@ public interface StudentelecivecouresDao {
     Studentelecivecoures getStudentelecivecouresByStudentelecivecouresName(String studentelecivecouresName);
 
 
-
+	List<Studentelecivecoures> superSearch(String superSearchKeyWord);
 
 }

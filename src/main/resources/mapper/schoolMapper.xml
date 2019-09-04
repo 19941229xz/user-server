@@ -9,7 +9,7 @@
 			<if test=" id !=null and id !='' ">and id=#{id}</if>  
 			<!-- 学校名称 -->  
 			<if test=" name !=null and name !='' ">and name=#{name}</if>  
-			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5本科，6大专 7其他） -->  
 			<if test=" type !=null and type !='' ">and type=#{type}</if>  
 			<!-- 学校地址，用于关联地区表 -->  
 			<if test=" address !=null and address !='' ">and address=#{address}</if>  
@@ -23,6 +23,15 @@
 			<if test=" email !=null and email !='' ">and email=#{email}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="School">SELECT * FROM school 
+		<where> 
+			<!-- 学校名称 -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 地址邮箱 -->  
+			<if test="1==1">or email like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存school -->
 	<insert parameterType="School" id="addSchool">INSERT INTO school
 		<trim prefix="(" suffix=")" suffixOverrides=","> 
@@ -30,7 +39,7 @@
 			<if test=" id !=null and id !='' ">id,</if>  
 			<!-- 学校名称 -->  
 			<if test=" name !=null and name !='' ">name,</if>  
-			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5本科，6大专 7其他） -->  
 			<if test=" type !=null and type !='' ">type,</if>  
 			<!-- 学校地址，用于关联地区表 -->  
 			<if test=" address !=null and address !='' ">address,</if>  
@@ -48,7 +57,7 @@
 			<if test=" id !=null and id !='' ">#{id},</if>  
 			<!-- 学校名称 -->  
 			<if test=" name !=null and name !='' ">#{name},</if>  
-			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5本科，6大专 7其他） -->  
 			<if test=" type !=null and type !='' ">#{type},</if>  
 			<!-- 学校地址，用于关联地区表 -->  
 			<if test=" address !=null and address !='' ">#{address},</if>  
@@ -70,7 +79,7 @@
 			<if test=" id !=null and id !='' ">id=#{id},</if>  
 			<!-- 学校名称 -->  
 			<if test=" name !=null and name !='' ">name=#{name},</if>  
-			<!-- 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他） -->  
+			<!-- 学校类型（1小学，2初中，3高中，4职高，5本科，6大专 7其他） -->  
 			<if test=" type !=null and type !='' ">type=#{type},</if>  
 			<!-- 学校地址，用于关联地区表 -->  
 			<if test=" address !=null and address !='' ">address=#{address},</if>  

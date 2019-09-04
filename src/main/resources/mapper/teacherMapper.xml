@@ -24,7 +24,16 @@
 			<!-- 所属公司id（关联公司表） -->  
 			<if test=" companyId !=null and companyId !='' ">and companyId=#{companyId}</if>  
 			<!-- 教师地址id（关联地区表） -->  
-			<if test=" regionId !=null and regionId !='' ">and regionId=#{regionId}</if> 
+			<if test=" regionId !=null and regionId !='' ">and regionId=#{regionId}</if>  
+			<!-- 岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">and jobTypeId=#{jobTypeId}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Teacher">SELECT * FROM teacher 
+		<where> 
+			<!-- 教师名字 -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
 		</where> 
 	</select>
 	<!-- 动态保存teacher -->
@@ -49,7 +58,9 @@
 			<!-- 所属公司id（关联公司表） -->  
 			<if test=" companyId !=null and companyId !='' ">companyId,</if>  
 			<!-- 教师地址id（关联地区表） -->  
-			<if test=" regionId !=null and regionId !='' ">regionId,</if> 
+			<if test=" regionId !=null and regionId !='' ">regionId,</if>  
+			<!-- 岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">jobTypeId,</if> 
 		</trim>  
 		<trim prefix="values(" suffix=")" suffixOverrides=","> 
 			<!-- 主键id -->  
@@ -71,7 +82,9 @@
 			<!-- 所属公司id（关联公司表） -->  
 			<if test=" companyId !=null and companyId !='' ">#{companyId},</if>  
 			<!-- 教师地址id（关联地区表） -->  
-			<if test=" regionId !=null and regionId !='' ">#{regionId},</if> 
+			<if test=" regionId !=null and regionId !='' ">#{regionId},</if>  
+			<!-- 岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">#{jobTypeId},</if> 
 		</trim>  
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
 	</insert>
@@ -97,7 +110,9 @@
 			<!-- 所属公司id（关联公司表） -->  
 			<if test=" companyId !=null and companyId !='' ">companyId=#{companyId},</if>  
 			<!-- 教师地址id（关联地区表） -->  
-			<if test=" regionId !=null and regionId !='' ">regionId=#{regionId},</if> 
+			<if test=" regionId !=null and regionId !='' ">regionId=#{regionId},</if>  
+			<!-- 岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">jobTypeId=#{jobTypeId},</if> 
 		</trim> WHERE id = #{id}
 	</update>
 </mapper>

@@ -24,6 +24,6 @@ public interface MemberDao {
     Member getMemberByMemberName(String memberName);
 
 
-
+	List<Member> superSearch(String superSearchKeyWord);
 
 }

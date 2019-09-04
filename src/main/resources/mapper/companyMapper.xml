@@ -27,6 +27,15 @@
 			<if test=" cfo !=null and cfo !='' ">and cfo=#{cfo}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Company">SELECT * FROM company 
+		<where> 
+			<!-- 公司名称 -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 公司注册号 -->  
+			<if test="1==1">or regId like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存company -->
 	<insert parameterType="Company" id="addCompany">INSERT INTO company
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

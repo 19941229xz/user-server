@@ -24,6 +24,6 @@ public interface TeachDao {
     Teach getTeachByTeachName(String teachName);
 
 
-
+	List<Teach> superSearch(String superSearchKeyWord);
 
 }

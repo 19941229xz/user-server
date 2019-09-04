@@ -16,7 +16,34 @@
 			<!-- 女生人数 -->  
 			<if test=" numOfGirls !=null and numOfGirls !='' ">and numOfGirls=#{numOfGirls}</if>  
 			<!-- 所属院系id（关联院系表） -->  
-			<if test=" faculty !=null and faculty !='' ">and faculty=#{faculty}</if> 
+			<if test=" facultyId !=null and facultyId !='' ">and facultyId=#{facultyId}</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">and banjiName=#{banjiName}</if>  
+			<!-- 班主任姓名 -->  
+			<if test=" headTeacherName !=null and headTeacherName !='' ">and headTeacherName=#{headTeacherName}</if>  
+			<!-- 所属岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">and jobTypeId=#{jobTypeId}</if>  
+			<!-- 开班时间 -->  
+			<if test=" startDate !=null ">and startDate=#{startDate}</if>  
+			<!-- 预计结业时间 -->  
+			<if test=" preEndDate !=null ">and preEndDate=#{preEndDate}</if>  
+			<!-- 实际结业时间 -->  
+			<if test=" realEndDate !=null ">and realEndDate=#{realEndDate}</if>  
+			<!-- 代课老师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">and teacherId=#{teacherId}</if>  
+			<!-- 代课老师姓名 -->  
+			<if test=" teacherName !=null and teacherName !='' ">and teacherName=#{teacherName}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Banji">SELECT * FROM banji 
+		<where> 
+			<!-- 班级名称 -->  
+			<if test="1==1">or banjiName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 班主任姓名 -->  
+			<if test="1==1">or headTeacherName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 代课老师姓名 -->  
+			<if test="1==1">or teacherName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
 		</where> 
 	</select>
 	<!-- 动态保存banji -->
@@ -33,7 +60,23 @@
 			<!-- 女生人数 -->  
 			<if test=" numOfGirls !=null and numOfGirls !='' ">numOfGirls,</if>  
 			<!-- 所属院系id（关联院系表） -->  
-			<if test=" faculty !=null and faculty !='' ">faculty,</if> 
+			<if test=" facultyId !=null and facultyId !='' ">facultyId,</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">banjiName,</if>  
+			<!-- 班主任姓名 -->  
+			<if test=" headTeacherName !=null and headTeacherName !='' ">headTeacherName,</if>  
+			<!-- 所属岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">jobTypeId,</if>  
+			<!-- 开班时间 -->  
+			<if test=" startDate !=null ">startDate,</if>  
+			<!-- 预计结业时间 -->  
+			<if test=" preEndDate !=null ">preEndDate,</if>  
+			<!-- 实际结业时间 -->  
+			<if test=" realEndDate !=null ">realEndDate,</if>  
+			<!-- 代课老师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">teacherId,</if>  
+			<!-- 代课老师姓名 -->  
+			<if test=" teacherName !=null and teacherName !='' ">teacherName,</if> 
 		</trim>  
 		<trim prefix="values(" suffix=")" suffixOverrides=","> 
 			<!-- 主键id -->  
@@ -47,7 +90,23 @@
 			<!-- 女生人数 -->  
 			<if test=" numOfGirls !=null and numOfGirls !='' ">#{numOfGirls},</if>  
 			<!-- 所属院系id（关联院系表） -->  
-			<if test=" faculty !=null and faculty !='' ">#{faculty},</if> 
+			<if test=" facultyId !=null and facultyId !='' ">#{facultyId},</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">#{banjiName},</if>  
+			<!-- 班主任姓名 -->  
+			<if test=" headTeacherName !=null and headTeacherName !='' ">#{headTeacherName},</if>  
+			<!-- 所属岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">#{jobTypeId},</if>  
+			<!-- 开班时间 -->  
+			<if test=" startDate !=null ">#{startDate},</if>  
+			<!-- 预计结业时间 -->  
+			<if test=" preEndDate !=null ">#{preEndDate},</if>  
+			<!-- 实际结业时间 -->  
+			<if test=" realEndDate !=null ">#{realEndDate},</if>  
+			<!-- 代课老师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">#{teacherId},</if>  
+			<!-- 代课老师姓名 -->  
+			<if test=" teacherName !=null and teacherName !='' ">#{teacherName},</if> 
 		</trim>  
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
 	</insert>
@@ -65,7 +124,23 @@
 			<!-- 女生人数 -->  
 			<if test=" numOfGirls !=null and numOfGirls !='' ">numOfGirls=#{numOfGirls},</if>  
 			<!-- 所属院系id（关联院系表） -->  
-			<if test=" faculty !=null and faculty !='' ">faculty=#{faculty},</if> 
+			<if test=" facultyId !=null and facultyId !='' ">facultyId=#{facultyId},</if>  
+			<!-- 班级名称 -->  
+			<if test=" banjiName !=null and banjiName !='' ">banjiName=#{banjiName},</if>  
+			<!-- 班主任姓名 -->  
+			<if test=" headTeacherName !=null and headTeacherName !='' ">headTeacherName=#{headTeacherName},</if>  
+			<!-- 所属岗位id -->  
+			<if test=" jobTypeId !=null and jobTypeId !='' ">jobTypeId=#{jobTypeId},</if>  
+			<!-- 开班时间 -->  
+			<if test=" startDate !=null ">startDate=#{startDate},</if>  
+			<!-- 预计结业时间 -->  
+			<if test=" preEndDate !=null ">preEndDate=#{preEndDate},</if>  
+			<!-- 实际结业时间 -->  
+			<if test=" realEndDate !=null ">realEndDate=#{realEndDate},</if>  
+			<!-- 代课老师id -->  
+			<if test=" teacherId !=null and teacherId !='' ">teacherId=#{teacherId},</if>  
+			<!-- 代课老师姓名 -->  
+			<if test=" teacherName !=null and teacherName !='' ">teacherName=#{teacherName},</if> 
 		</trim> WHERE id = #{id}
 	</update>
 </mapper>

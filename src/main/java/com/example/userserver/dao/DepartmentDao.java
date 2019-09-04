@@ -24,6 +24,6 @@ public interface DepartmentDao {
     Department getDepartmentByDepartmentName(String departmentName);
 
 
-
+	List<Department> superSearch(String superSearchKeyWord);
 
 }

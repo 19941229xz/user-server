@@ -27,6 +27,13 @@
 			<if test=" electiveCouresId !=null and electiveCouresId !='' ">and electiveCouresId=#{electiveCouresId}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Student">SELECT * FROM student 
+		<where> 
+			<!-- 学生姓名 -->  
+			<if test="1==1">or studentName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存student -->
 	<insert parameterType="Student" id="addStudent">INSERT INTO student
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

@@ -13,6 +13,13 @@
 			<if test=" schId !=null and schId !='' ">and schId=#{schId}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Faculty">SELECT * FROM faculty 
+		<where> 
+			<!-- 院系名称 -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存faculty -->
 	<insert parameterType="Faculty" id="addFaculty">INSERT INTO faculty
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

@@ -12,6 +12,15 @@
 			<if test=" authorizationCode !=null and authorizationCode !='' ">and authorizationCode=#{authorizationCode}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Emailaddressmanagement">SELECT * FROM emailaddressmanagement 
+		<where> 
+			<!-- 发送邮件的本地账号 -->  
+			<if test="1==1">or emailAddress like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 授权码 -->  
+			<if test="1==1">or authorizationCode like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存emailaddressmanagement -->
 	<insert parameterType="Emailaddressmanagement" id="addEmailaddressmanagement">INSERT INTO emailaddressmanagement
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

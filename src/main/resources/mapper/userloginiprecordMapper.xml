@@ -15,6 +15,13 @@
 			<if test=" totalLogins !=null and totalLogins !='' ">and totalLogins=#{totalLogins}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Userloginiprecord">SELECT * FROM userloginiprecord 
+		<where> 
+			<!-- 登录ip -->  
+			<if test="1==1">or loginIp like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存userloginiprecord -->
 	<insert parameterType="Userloginiprecord" id="addUserloginiprecord">INSERT INTO userloginiprecord
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

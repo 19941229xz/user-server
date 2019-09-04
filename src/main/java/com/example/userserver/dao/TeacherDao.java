@@ -24,6 +24,6 @@ public interface TeacherDao {
     Teacher getTeacherByTeacherName(String teacherName);
 
 
-
+	List<Teacher> superSearch(String superSearchKeyWord);
 
 }

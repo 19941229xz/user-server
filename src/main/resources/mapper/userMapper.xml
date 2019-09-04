@@ -91,6 +91,45 @@
 			<if test=" inviteNum !=null and inviteNum !='' ">and inviteNum=#{inviteNum}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="User">SELECT * FROM user 
+		<where> 
+			<!-- 头像 -->  
+			<if test="1==1">or headImg like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 用户名 -->  
+			<if test="1==1">or userName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 密码 -->  
+			<if test="1==1">or password like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 昵称 -->  
+			<if test="1==1">or nickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 真实姓名 -->  
+			<if test="1==1">or realName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- qq号 -->  
+			<if test="1==1">or qq like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 微信号 -->  
+			<if test="1==1">or weChat like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 手机号 -->  
+			<if test="1==1">or phoneNum like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 邮箱 -->  
+			<if test="1==1">or email like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 注册ip -->  
+			<if test="1==1">or regIp like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- （上一次）登出ip -->  
+			<if test="1==1">or lastLogoutIp like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- （本次）登录ip -->  
+			<if test="1==1">or loginIp like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 常用登录ip -->  
+			<if test="1==1">or commonLoginIp like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 支付密码 -->  
+			<if test="1==1">or payPassword like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 用户签名 -->  
+			<if test="1==1">or signature like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 用户地址 -->  
+			<if test="1==1">or userAddress like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 邀请码 -->  
+			<if test="1==1">or inviteCode like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存user -->
 	<insert parameterType="User" id="addUser">INSERT INTO user
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

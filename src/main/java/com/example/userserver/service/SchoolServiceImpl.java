@@ -31,16 +31,31 @@ public class SchoolServiceImpl implements SchoolService {
     @Transactional(readOnly = true)
 	public Object getAllSchool(PageParam<School> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<School> schoolList=schoolDao.getAllSchool(pageParam.getModel());
+            PageInfo<School> schoolPageInfo = new PageInfo<School>(schoolList);
+    
+            return schoolPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<School> schoolList=schoolDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<School> schoolPageInfo = new PageInfo<School>(schoolList);
+    
+            return schoolPageInfo;
         }
-
-
-        List<School> schoolList=schoolDao.getAllSchool(pageParam.getModel());
-        PageInfo<School> schoolPageInfo = new PageInfo<School>(schoolList);
-
-        return schoolPageInfo;
+    
+    	
     
     }
 

@@ -31,16 +31,31 @@ public class StudentelecivecouresServiceImpl implements StudentelecivecouresServ
     @Transactional(readOnly = true)
 	public Object getAllStudentelecivecoures(PageParam<Studentelecivecoures> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Studentelecivecoures> studentelecivecouresList=studentelecivecouresDao.getAllStudentelecivecoures(pageParam.getModel());
+            PageInfo<Studentelecivecoures> studentelecivecouresPageInfo = new PageInfo<Studentelecivecoures>(studentelecivecouresList);
+    
+            return studentelecivecouresPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Studentelecivecoures> studentelecivecouresList=studentelecivecouresDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Studentelecivecoures> studentelecivecouresPageInfo = new PageInfo<Studentelecivecoures>(studentelecivecouresList);
+    
+            return studentelecivecouresPageInfo;
         }
-
-
-        List<Studentelecivecoures> studentelecivecouresList=studentelecivecouresDao.getAllStudentelecivecoures(pageParam.getModel());
-        PageInfo<Studentelecivecoures> studentelecivecouresPageInfo = new PageInfo<Studentelecivecoures>(studentelecivecouresList);
-
-        return studentelecivecouresPageInfo;
+    
+    	
     
     }
 

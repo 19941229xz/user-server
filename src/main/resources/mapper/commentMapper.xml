@@ -22,7 +22,40 @@
 			<!-- 赞同人数 -->  
 			<if test=" agreeNum !=null and agreeNum !='' ">and agreeNum=#{agreeNum}</if>  
 			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
-			<if test=" parentCommentId !=null and parentCommentId !='' ">and parentCommentId=#{parentCommentId}</if> 
+			<if test=" parentCommentId !=null and parentCommentId !='' ">and parentCommentId=#{parentCommentId}</if>  
+			<!-- 评论时间 -->  
+			<if test=" createDate !=null ">and createDate=#{createDate}</if>  
+			<!-- 评论用户账号 -->  
+			<if test=" userName !=null and userName !='' ">and userName=#{userName}</if>  
+			<!-- 评论人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">and userNickName=#{userNickName}</if>  
+			<!-- 评论人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">and userRealName=#{userRealName}</if>  
+			<!-- 评论人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">and userHeadPic=#{userHeadPic}</if>  
+			<!-- 相关课程id -->  
+			<if test=" relativeCourseId !=null and relativeCourseId !='' ">and relativeCourseId=#{relativeCourseId}</if>  
+			<!-- 相关问题id -->  
+			<if test=" relativeQuestionId !=null and relativeQuestionId !='' ">and relativeQuestionId=#{relativeQuestionId}</if>  
+			<!-- 相关试卷id -->  
+			<if test=" relativeExampaperId !=null and relativeExampaperId !='' ">and relativeExampaperId=#{relativeExampaperId}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Comment">SELECT * FROM comment 
+		<where> 
+			<!-- 评论图片 -->  
+			<if test="1==1">or img like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论内容 -->  
+			<if test="1==1">or content like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论用户账号 -->  
+			<if test="1==1">or userName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论人昵称 -->  
+			<if test="1==1">or userNickName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论人真实姓名 -->  
+			<if test="1==1">or userRealName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 评论人头像 -->  
+			<if test="1==1">or userHeadPic like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
 		</where> 
 	</select>
 	<!-- 动态保存comment -->
@@ -45,7 +78,23 @@
 			<!-- 赞同人数 -->  
 			<if test=" agreeNum !=null and agreeNum !='' ">agreeNum,</if>  
 			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
-			<if test=" parentCommentId !=null and parentCommentId !='' ">parentCommentId,</if> 
+			<if test=" parentCommentId !=null and parentCommentId !='' ">parentCommentId,</if>  
+			<!-- 评论时间 -->  
+			<if test=" createDate !=null ">createDate,</if>  
+			<!-- 评论用户账号 -->  
+			<if test=" userName !=null and userName !='' ">userName,</if>  
+			<!-- 评论人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">userNickName,</if>  
+			<!-- 评论人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">userRealName,</if>  
+			<!-- 评论人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">userHeadPic,</if>  
+			<!-- 相关课程id -->  
+			<if test=" relativeCourseId !=null and relativeCourseId !='' ">relativeCourseId,</if>  
+			<!-- 相关问题id -->  
+			<if test=" relativeQuestionId !=null and relativeQuestionId !='' ">relativeQuestionId,</if>  
+			<!-- 相关试卷id -->  
+			<if test=" relativeExampaperId !=null and relativeExampaperId !='' ">relativeExampaperId,</if> 
 		</trim>  
 		<trim prefix="values(" suffix=")" suffixOverrides=","> 
 			<!-- 主键id -->  
@@ -65,7 +114,23 @@
 			<!-- 赞同人数 -->  
 			<if test=" agreeNum !=null and agreeNum !='' ">#{agreeNum},</if>  
 			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
-			<if test=" parentCommentId !=null and parentCommentId !='' ">#{parentCommentId},</if> 
+			<if test=" parentCommentId !=null and parentCommentId !='' ">#{parentCommentId},</if>  
+			<!-- 评论时间 -->  
+			<if test=" createDate !=null ">#{createDate},</if>  
+			<!-- 评论用户账号 -->  
+			<if test=" userName !=null and userName !='' ">#{userName},</if>  
+			<!-- 评论人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">#{userNickName},</if>  
+			<!-- 评论人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">#{userRealName},</if>  
+			<!-- 评论人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">#{userHeadPic},</if>  
+			<!-- 相关课程id -->  
+			<if test=" relativeCourseId !=null and relativeCourseId !='' ">#{relativeCourseId},</if>  
+			<!-- 相关问题id -->  
+			<if test=" relativeQuestionId !=null and relativeQuestionId !='' ">#{relativeQuestionId},</if>  
+			<!-- 相关试卷id -->  
+			<if test=" relativeExampaperId !=null and relativeExampaperId !='' ">#{relativeExampaperId},</if> 
 		</trim>  
 		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
 	</insert>
@@ -89,7 +154,23 @@
 			<!-- 赞同人数 -->  
 			<if test=" agreeNum !=null and agreeNum !='' ">agreeNum=#{agreeNum},</if>  
 			<!-- 父评论id（对应主键id，-1表示没有父评论） -->  
-			<if test=" parentCommentId !=null and parentCommentId !='' ">parentCommentId=#{parentCommentId},</if> 
+			<if test=" parentCommentId !=null and parentCommentId !='' ">parentCommentId=#{parentCommentId},</if>  
+			<!-- 评论时间 -->  
+			<if test=" createDate !=null ">createDate=#{createDate},</if>  
+			<!-- 评论用户账号 -->  
+			<if test=" userName !=null and userName !='' ">userName=#{userName},</if>  
+			<!-- 评论人昵称 -->  
+			<if test=" userNickName !=null and userNickName !='' ">userNickName=#{userNickName},</if>  
+			<!-- 评论人真实姓名 -->  
+			<if test=" userRealName !=null and userRealName !='' ">userRealName=#{userRealName},</if>  
+			<!-- 评论人头像 -->  
+			<if test=" userHeadPic !=null and userHeadPic !='' ">userHeadPic=#{userHeadPic},</if>  
+			<!-- 相关课程id -->  
+			<if test=" relativeCourseId !=null and relativeCourseId !='' ">relativeCourseId=#{relativeCourseId},</if>  
+			<!-- 相关问题id -->  
+			<if test=" relativeQuestionId !=null and relativeQuestionId !='' ">relativeQuestionId=#{relativeQuestionId},</if>  
+			<!-- 相关试卷id -->  
+			<if test=" relativeExampaperId !=null and relativeExampaperId !='' ">relativeExampaperId=#{relativeExampaperId},</if> 
 		</trim> WHERE id = #{id}
 	</update>
 </mapper>

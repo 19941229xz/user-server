@@ -31,16 +31,31 @@ public class CommentServiceImpl implements CommentService {
     @Transactional(readOnly = true)
 	public Object getAllComment(PageParam<Comment> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Comment> commentList=commentDao.getAllComment(pageParam.getModel());
+            PageInfo<Comment> commentPageInfo = new PageInfo<Comment>(commentList);
+    
+            return commentPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Comment> commentList=commentDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Comment> commentPageInfo = new PageInfo<Comment>(commentList);
+    
+            return commentPageInfo;
         }
-
-
-        List<Comment> commentList=commentDao.getAllComment(pageParam.getModel());
-        PageInfo<Comment> commentPageInfo = new PageInfo<Comment>(commentList);
-
-        return commentPageInfo;
+    
+    	
     
     }
 

@@ -24,13 +24,21 @@ public class CourseController {
     public Object getAllCourse(@RequestBody PageParam<Course> pageParam){
         return MyRsp.success(courseService.getAllCourse(pageParam)).msg("查询成功");
     }
+    
+    @ApiOperation("按照关键字高级检索所有课程 支持分页和排序")
+    @PostMapping("/superSearchCourse")
+    public Object superSearch(@RequestBody PageParam<Course> pageParam){
+        return MyRsp.success(courseService.getAllCourse(pageParam)).msg("检索成功");
+    }
 
+	@ApiOperation("通过id删除课程，同时会清空redis缓存")
     @GetMapping("/removeCourseById/{id}")
     public Object removeCourseByCourseName(@PathVariable("id") int id){
 
         return courseService.removeCourseById(id)?MyRsp.success(null).msg("删除成功"):MyRsp.error().msg("删除失败");
     }
 
+	@ApiOperation("添加{table.comment}，成功会将该数据放入redis缓存")
     @PostMapping("/addCourse")
     public Object addCourse(@RequestBody @Valid Course courseParam){
         Course course=(Course)courseService.addCourse(courseParam);
@@ -39,13 +47,14 @@ public class CourseController {
                 msg("添加成功"):MyRsp.error().msg("添加失败");
     }
 
-
+	@ApiOperation("修改{table.comment}，成功会将清除该数据的redis缓存")
     @PutMapping("/updateCourse")
     public Object updateCourse(@RequestBody@Valid Course course){
         return courseService.updateCourse(course)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }
 
+	@ApiOperation("通过id获取{table.comment}，优先从redis缓存中查")
     @GetMapping("/getCourseById/{id}")
     public Object getCourseById(@PathVariable("id") int id){
 
@@ -53,6 +62,7 @@ public class CourseController {
         return course!=null?MyRsp.success(course):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
     
+    @ApiOperation("通过id数组批量删除{table.comment}，删除成功也会清空redis缓存数据")
     @PostMapping("/batchDeleteCourseByIds")
     public Object batchDeleteCourseByIds(@RequestBody int[] ids){
 	    int affectedNum=0;

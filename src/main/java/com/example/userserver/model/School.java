@@ -18,8 +18,8 @@ public class School implements Serializable {
 	// 学校名称
     @ApiModelProperty(value = "学校名称" ,name = "name")
 	private String name;
-	// 学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他）
-    @ApiModelProperty(value = "学校类型（1小学，2初中，3高中，4职高，5大学，6大专 7其他）" ,name = "type")
+	// 学校类型（1小学，2初中，3高中，4职高，5本科，6大专 7其他）
+    @ApiModelProperty(value = "学校类型（1小学，2初中，3高中，4职高，5本科，6大专 7其他）" ,name = "type")
 	private Integer type;
 	// 学校地址，用于关联地区表
     @ApiModelProperty(value = "学校地址，用于关联地区表" ,name = "address")

@@ -9,10 +9,17 @@
 			<if test=" id !=null and id !='' ">and id=#{id}</if>  
 			<!-- 部门名称 -->  
 			<if test=" name !=null and name !='' ">and name=#{name}</if>  
-			<!-- 部门负责人（对应职工表） -->  
-			<if test=" principal !=null and principal !='' ">and principal=#{principal}</if>  
+			<!-- 部门负责人id（对应职工表） -->  
+			<if test=" principalId !=null and principalId !='' ">and principalId=#{principalId}</if>  
 			<!-- 员工人数 -->  
 			<if test=" numOfStaff !=null and numOfStaff !='' ">and numOfStaff=#{numOfStaff}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Department">SELECT * FROM department 
+		<where> 
+			<!-- 部门名称 -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
 		</where> 
 	</select>
 	<!-- 动态保存department -->
@@ -22,8 +29,8 @@
 			<if test=" id !=null and id !='' ">id,</if>  
 			<!-- 部门名称 -->  
 			<if test=" name !=null and name !='' ">name,</if>  
-			<!-- 部门负责人（对应职工表） -->  
-			<if test=" principal !=null and principal !='' ">principal,</if>  
+			<!-- 部门负责人id（对应职工表） -->  
+			<if test=" principalId !=null and principalId !='' ">principalId,</if>  
 			<!-- 员工人数 -->  
 			<if test=" numOfStaff !=null and numOfStaff !='' ">numOfStaff,</if> 
 		</trim>  
@@ -32,8 +39,8 @@
 			<if test=" id !=null and id !='' ">#{id},</if>  
 			<!-- 部门名称 -->  
 			<if test=" name !=null and name !='' ">#{name},</if>  
-			<!-- 部门负责人（对应职工表） -->  
-			<if test=" principal !=null and principal !='' ">#{principal},</if>  
+			<!-- 部门负责人id（对应职工表） -->  
+			<if test=" principalId !=null and principalId !='' ">#{principalId},</if>  
 			<!-- 员工人数 -->  
 			<if test=" numOfStaff !=null and numOfStaff !='' ">#{numOfStaff},</if> 
 		</trim>  
@@ -46,8 +53,8 @@
 			<if test=" id !=null and id !='' ">id=#{id},</if>  
 			<!-- 部门名称 -->  
 			<if test=" name !=null and name !='' ">name=#{name},</if>  
-			<!-- 部门负责人（对应职工表） -->  
-			<if test=" principal !=null and principal !='' ">principal=#{principal},</if>  
+			<!-- 部门负责人id（对应职工表） -->  
+			<if test=" principalId !=null and principalId !='' ">principalId=#{principalId},</if>  
 			<!-- 员工人数 -->  
 			<if test=" numOfStaff !=null and numOfStaff !='' ">numOfStaff=#{numOfStaff},</if> 
 		</trim> WHERE id = #{id}

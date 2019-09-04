@@ -24,6 +24,6 @@ public interface PositionDao {
     Position getPositionByPositionName(String positionName);
 
 
-
+	List<Position> superSearch(String superSearchKeyWord);
 
 }

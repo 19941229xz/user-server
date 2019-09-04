@@ -24,13 +24,21 @@ public class StaffController {
     public Object getAllStaff(@RequestBody PageParam<Staff> pageParam){
         return MyRsp.success(staffService.getAllStaff(pageParam)).msg("查询成功");
     }
+    
+    @ApiOperation("按照关键字高级检索所有职工 支持分页和排序")
+    @PostMapping("/superSearchStaff")
+    public Object superSearch(@RequestBody PageParam<Staff> pageParam){
+        return MyRsp.success(staffService.getAllStaff(pageParam)).msg("检索成功");
+    }
 
+	@ApiOperation("通过id删除职工，同时会清空redis缓存")
     @GetMapping("/removeStaffById/{id}")
     public Object removeStaffByStaffName(@PathVariable("id") int id){
 
         return staffService.removeStaffById(id)?MyRsp.success(null).msg("删除成功"):MyRsp.error().msg("删除失败");
     }
 
+	@ApiOperation("添加{table.comment}，成功会将该数据放入redis缓存")
     @PostMapping("/addStaff")
     public Object addStaff(@RequestBody @Valid Staff staffParam){
         Staff staff=(Staff)staffService.addStaff(staffParam);
@@ -39,13 +47,14 @@ public class StaffController {
                 msg("添加成功"):MyRsp.error().msg("添加失败");
     }
 
-
+	@ApiOperation("修改{table.comment}，成功会将清除该数据的redis缓存")
     @PutMapping("/updateStaff")
     public Object updateStaff(@RequestBody@Valid Staff staff){
         return staffService.updateStaff(staff)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }
 
+	@ApiOperation("通过id获取{table.comment}，优先从redis缓存中查")
     @GetMapping("/getStaffById/{id}")
     public Object getStaffById(@PathVariable("id") int id){
 
@@ -53,6 +62,7 @@ public class StaffController {
         return staff!=null?MyRsp.success(staff):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
     
+    @ApiOperation("通过id数组批量删除{table.comment}，删除成功也会清空redis缓存数据")
     @PostMapping("/batchDeleteStaffByIds")
     public Object batchDeleteStaffByIds(@RequestBody int[] ids){
 	    int affectedNum=0;

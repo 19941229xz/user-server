@@ -11,6 +11,13 @@
 			<if test=" name !=null and name !='' ">and name=#{name}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Position">SELECT * FROM position 
+		<where> 
+			<!-- 职位名称（添加记录的时候设置每条记录id分别代表的职位） -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存position -->
 	<insert parameterType="Position" id="addPosition">INSERT INTO position
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

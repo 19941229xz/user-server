@@ -31,16 +31,31 @@ public class EmailaddressmanagementServiceImpl implements Emailaddressmanagement
     @Transactional(readOnly = true)
 	public Object getAllEmailaddressmanagement(PageParam<Emailaddressmanagement> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Emailaddressmanagement> emailaddressmanagementList=emailaddressmanagementDao.getAllEmailaddressmanagement(pageParam.getModel());
+            PageInfo<Emailaddressmanagement> emailaddressmanagementPageInfo = new PageInfo<Emailaddressmanagement>(emailaddressmanagementList);
+    
+            return emailaddressmanagementPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Emailaddressmanagement> emailaddressmanagementList=emailaddressmanagementDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Emailaddressmanagement> emailaddressmanagementPageInfo = new PageInfo<Emailaddressmanagement>(emailaddressmanagementList);
+    
+            return emailaddressmanagementPageInfo;
         }
-
-
-        List<Emailaddressmanagement> emailaddressmanagementList=emailaddressmanagementDao.getAllEmailaddressmanagement(pageParam.getModel());
-        PageInfo<Emailaddressmanagement> emailaddressmanagementPageInfo = new PageInfo<Emailaddressmanagement>(emailaddressmanagementList);
-
-        return emailaddressmanagementPageInfo;
+    
+    	
     
     }
 

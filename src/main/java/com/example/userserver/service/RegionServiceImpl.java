@@ -31,16 +31,31 @@ public class RegionServiceImpl implements RegionService {
     @Transactional(readOnly = true)
 	public Object getAllRegion(PageParam<Region> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Region> regionList=regionDao.getAllRegion(pageParam.getModel());
+            PageInfo<Region> regionPageInfo = new PageInfo<Region>(regionList);
+    
+            return regionPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Region> regionList=regionDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Region> regionPageInfo = new PageInfo<Region>(regionList);
+    
+            return regionPageInfo;
         }
-
-
-        List<Region> regionList=regionDao.getAllRegion(pageParam.getModel());
-        PageInfo<Region> regionPageInfo = new PageInfo<Region>(regionList);
-
-        return regionPageInfo;
+    
+    	
     
     }
 

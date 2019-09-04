@@ -31,16 +31,31 @@ public class StaffServiceImpl implements StaffService {
     @Transactional(readOnly = true)
 	public Object getAllStaff(PageParam<Staff> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Staff> staffList=staffDao.getAllStaff(pageParam.getModel());
+            PageInfo<Staff> staffPageInfo = new PageInfo<Staff>(staffList);
+    
+            return staffPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Staff> staffList=staffDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Staff> staffPageInfo = new PageInfo<Staff>(staffList);
+    
+            return staffPageInfo;
         }
-
-
-        List<Staff> staffList=staffDao.getAllStaff(pageParam.getModel());
-        PageInfo<Staff> staffPageInfo = new PageInfo<Staff>(staffList);
-
-        return staffPageInfo;
+    
+    	
     
     }
 

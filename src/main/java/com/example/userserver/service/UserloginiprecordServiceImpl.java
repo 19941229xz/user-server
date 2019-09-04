@@ -31,16 +31,31 @@ public class UserloginiprecordServiceImpl implements UserloginiprecordService {
     @Transactional(readOnly = true)
 	public Object getAllUserloginiprecord(PageParam<Userloginiprecord> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Userloginiprecord> userloginiprecordList=userloginiprecordDao.getAllUserloginiprecord(pageParam.getModel());
+            PageInfo<Userloginiprecord> userloginiprecordPageInfo = new PageInfo<Userloginiprecord>(userloginiprecordList);
+    
+            return userloginiprecordPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Userloginiprecord> userloginiprecordList=userloginiprecordDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Userloginiprecord> userloginiprecordPageInfo = new PageInfo<Userloginiprecord>(userloginiprecordList);
+    
+            return userloginiprecordPageInfo;
         }
-
-
-        List<Userloginiprecord> userloginiprecordList=userloginiprecordDao.getAllUserloginiprecord(pageParam.getModel());
-        PageInfo<Userloginiprecord> userloginiprecordPageInfo = new PageInfo<Userloginiprecord>(userloginiprecordList);
-
-        return userloginiprecordPageInfo;
+    
+    	
     
     }
 

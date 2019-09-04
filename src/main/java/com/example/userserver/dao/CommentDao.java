@@ -24,6 +24,6 @@ public interface CommentDao {
     Comment getCommentByCommentName(String commentName);
 
 
-
+	List<Comment> superSearch(String superSearchKeyWord);
 
 }

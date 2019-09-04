@@ -47,7 +47,7 @@ public class User implements Serializable {
 	private String weChat;
 	// 手机号
     @ApiModelProperty(value = "手机号" ,name = "phoneNum")
-	private Integer phoneNum;
+	private String phoneNum;
 	// 邮箱
     @ApiModelProperty(value = "邮箱" ,name = "email")
 	private String email;

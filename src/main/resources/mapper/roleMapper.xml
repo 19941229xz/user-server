@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userserver.dao.RoleDao">
+	<!-- 动态条件查询role -->
+	<select id="getAllRole" parameterType="Role" resultType="Role">SELECT * FROM role
+		<where> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">and id=#{id}</if>  
+			<!-- 角色英文名 -->  
+			<if test=" roleName !=null and roleName !='' ">and roleName=#{roleName}</if>  
+			<!-- 角色中文名称 -->  
+			<if test=" roleNameCN !=null and roleNameCN !='' ">and roleNameCN=#{roleNameCN}</if>  
+			<!-- 角色级别 -->  
+			<if test=" roleLevel !=null and roleLevel !='' ">and roleLevel=#{roleLevel}</if> 
+		</where> 
+	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Role">SELECT * FROM role 
+		<where> 
+			<!-- 角色英文名 -->  
+			<if test="1==1">or roleName like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 角色中文名称 -->  
+			<if test="1==1">or roleNameCN like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
+	<!-- 动态保存role -->
+	<insert parameterType="Role" id="addRole">INSERT INTO role
+		<trim prefix="(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id,</if>  
+			<!-- 角色英文名 -->  
+			<if test=" roleName !=null and roleName !='' ">roleName,</if>  
+			<!-- 角色中文名称 -->  
+			<if test=" roleNameCN !=null and roleNameCN !='' ">roleNameCN,</if>  
+			<!-- 角色级别 -->  
+			<if test=" roleLevel !=null and roleLevel !='' ">roleLevel,</if> 
+		</trim>  
+		<trim prefix="values(" suffix=")" suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">#{id},</if>  
+			<!-- 角色英文名 -->  
+			<if test=" roleName !=null and roleName !='' ">#{roleName},</if>  
+			<!-- 角色中文名称 -->  
+			<if test=" roleNameCN !=null and roleNameCN !='' ">#{roleNameCN},</if>  
+			<!-- 角色级别 -->  
+			<if test=" roleLevel !=null and roleLevel !='' ">#{roleLevel},</if> 
+		</trim>  
+		<selectKey resultType="int" keyProperty="id" order="AFTER">select LAST_INSERT_ID()</selectKey> 
+	</insert>
+	<!-- 动态更新role -->
+	<update id="updateRole" parameterType="Role">update role set 
+		<trim suffixOverrides=","> 
+			<!-- 主键 -->  
+			<if test=" id !=null and id !='' ">id=#{id},</if>  
+			<!-- 角色英文名 -->  
+			<if test=" roleName !=null and roleName !='' ">roleName=#{roleName},</if>  
+			<!-- 角色中文名称 -->  
+			<if test=" roleNameCN !=null and roleNameCN !='' ">roleNameCN=#{roleNameCN},</if>  
+			<!-- 角色级别 -->  
+			<if test=" roleLevel !=null and roleLevel !='' ">roleLevel=#{roleLevel},</if> 
+		</trim> WHERE id = #{id}
+	</update>
+</mapper>

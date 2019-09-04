@@ -24,13 +24,21 @@ public class StudentelecivecouresController {
     public Object getAllStudentelecivecoures(@RequestBody PageParam<Studentelecivecoures> pageParam){
         return MyRsp.success(studentelecivecouresService.getAllStudentelecivecoures(pageParam)).msg("查询成功");
     }
+    
+    @ApiOperation("按照关键字高级检索所有学生选课 支持分页和排序")
+    @PostMapping("/superSearchStudentelecivecoures")
+    public Object superSearch(@RequestBody PageParam<Studentelecivecoures> pageParam){
+        return MyRsp.success(studentelecivecouresService.getAllStudentelecivecoures(pageParam)).msg("检索成功");
+    }
 
+	@ApiOperation("通过id删除学生选课，同时会清空redis缓存")
     @GetMapping("/removeStudentelecivecouresById/{id}")
     public Object removeStudentelecivecouresByStudentelecivecouresName(@PathVariable("id") int id){
 
         return studentelecivecouresService.removeStudentelecivecouresById(id)?MyRsp.success(null).msg("删除成功"):MyRsp.error().msg("删除失败");
     }
 
+	@ApiOperation("添加{table.comment}，成功会将该数据放入redis缓存")
     @PostMapping("/addStudentelecivecoures")
     public Object addStudentelecivecoures(@RequestBody @Valid Studentelecivecoures studentelecivecouresParam){
         Studentelecivecoures studentelecivecoures=(Studentelecivecoures)studentelecivecouresService.addStudentelecivecoures(studentelecivecouresParam);
@@ -39,13 +47,14 @@ public class StudentelecivecouresController {
                 msg("添加成功"):MyRsp.error().msg("添加失败");
     }
 
-
+	@ApiOperation("修改{table.comment}，成功会将清除该数据的redis缓存")
     @PutMapping("/updateStudentelecivecoures")
     public Object updateStudentelecivecoures(@RequestBody@Valid Studentelecivecoures studentelecivecoures){
         return studentelecivecouresService.updateStudentelecivecoures(studentelecivecoures)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }
 
+	@ApiOperation("通过id获取{table.comment}，优先从redis缓存中查")
     @GetMapping("/getStudentelecivecouresById/{id}")
     public Object getStudentelecivecouresById(@PathVariable("id") int id){
 
@@ -53,6 +62,7 @@ public class StudentelecivecouresController {
         return studentelecivecoures!=null?MyRsp.success(studentelecivecoures):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
     
+    @ApiOperation("通过id数组批量删除{table.comment}，删除成功也会清空redis缓存数据")
     @PostMapping("/batchDeleteStudentelecivecouresByIds")
     public Object batchDeleteStudentelecivecouresByIds(@RequestBody int[] ids){
 	    int affectedNum=0;

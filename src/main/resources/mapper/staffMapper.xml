@@ -23,6 +23,17 @@
 			<if test=" email !=null and email !='' ">and email=#{email}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Staff">SELECT * FROM staff 
+		<where> 
+			<!-- 职工名称 -->  
+			<if test="1==1">or name like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 电话 -->  
+			<if test="1==1">or phone like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if>  
+			<!-- 邮箱 -->  
+			<if test="1==1">or email like CONCAT(CONCAT('%',#{superSearchKeyWord}), '%')</if> 
+		</where> 
+	</select>
 	<!-- 动态保存staff -->
 	<insert parameterType="Staff" id="addStaff">INSERT INTO staff
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

@@ -13,6 +13,10 @@
 			<if test=" courseId !=null and courseId !='' ">and courseId=#{courseId}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Teach">SELECT * FROM teach 
+		<where></where> 
+	</select>
 	<!-- 动态保存teach -->
 	<insert parameterType="Teach" id="addTeach">INSERT INTO teach
 		<trim prefix="(" suffix=")" suffixOverrides=","> 

@@ -31,16 +31,31 @@ public class CourseServiceImpl implements CourseService {
     @Transactional(readOnly = true)
 	public Object getAllCourse(PageParam<Course> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Course> courseList=courseDao.getAllCourse(pageParam.getModel());
+            PageInfo<Course> coursePageInfo = new PageInfo<Course>(courseList);
+    
+            return coursePageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Course> courseList=courseDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Course> coursePageInfo = new PageInfo<Course>(courseList);
+    
+            return coursePageInfo;
         }
-
-
-        List<Course> courseList=courseDao.getAllCourse(pageParam.getModel());
-        PageInfo<Course> coursePageInfo = new PageInfo<Course>(courseList);
-
-        return coursePageInfo;
+    
+    	
     
     }
 

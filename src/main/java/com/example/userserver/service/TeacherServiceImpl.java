@@ -31,16 +31,31 @@ public class TeacherServiceImpl implements TeacherService {
     @Transactional(readOnly = true)
 	public Object getAllTeacher(PageParam<Teacher> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Teacher> teacherList=teacherDao.getAllTeacher(pageParam.getModel());
+            PageInfo<Teacher> teacherPageInfo = new PageInfo<Teacher>(teacherList);
+    
+            return teacherPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Teacher> teacherList=teacherDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Teacher> teacherPageInfo = new PageInfo<Teacher>(teacherList);
+    
+            return teacherPageInfo;
         }
-
-
-        List<Teacher> teacherList=teacherDao.getAllTeacher(pageParam.getModel());
-        PageInfo<Teacher> teacherPageInfo = new PageInfo<Teacher>(teacherList);
-
-        return teacherPageInfo;
+    
+    	
     
     }
 

@@ -24,6 +24,6 @@ public interface StudentDao {
     Student getStudentByStudentName(String studentName);
 
 
-
+	List<Student> superSearch(String superSearchKeyWord);
 
 }

@@ -24,6 +24,6 @@ public interface SchoolDao {
     School getSchoolBySchoolName(String schoolName);
 
 
-
+	List<School> superSearch(String superSearchKeyWord);
 
 }

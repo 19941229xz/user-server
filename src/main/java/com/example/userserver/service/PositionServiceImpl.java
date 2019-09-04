@@ -31,16 +31,31 @@ public class PositionServiceImpl implements PositionService {
     @Transactional(readOnly = true)
 	public Object getAllPosition(PageParam<Position> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Position> positionList=positionDao.getAllPosition(pageParam.getModel());
+            PageInfo<Position> positionPageInfo = new PageInfo<Position>(positionList);
+    
+            return positionPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Position> positionList=positionDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Position> positionPageInfo = new PageInfo<Position>(positionList);
+    
+            return positionPageInfo;
         }
-
-
-        List<Position> positionList=positionDao.getAllPosition(pageParam.getModel());
-        PageInfo<Position> positionPageInfo = new PageInfo<Position>(positionList);
-
-        return positionPageInfo;
+    
+    	
     
     }
 

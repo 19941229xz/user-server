@@ -31,16 +31,31 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(readOnly = true)
 	public Object getAllStudent(PageParam<Student> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Student> studentList=studentDao.getAllStudent(pageParam.getModel());
+            PageInfo<Student> studentPageInfo = new PageInfo<Student>(studentList);
+    
+            return studentPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Student> studentList=studentDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Student> studentPageInfo = new PageInfo<Student>(studentList);
+    
+            return studentPageInfo;
         }
-
-
-        List<Student> studentList=studentDao.getAllStudent(pageParam.getModel());
-        PageInfo<Student> studentPageInfo = new PageInfo<Student>(studentList);
-
-        return studentPageInfo;
+    
+    	
     
     }
 

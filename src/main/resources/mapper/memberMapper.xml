@@ -8,7 +8,7 @@
 			<!-- 主键id -->  
 			<if test=" id !=null and id !='' ">and id=#{id}</if>  
 			<!-- 会员等级 -->  
-			<if test=" level !=null and level !='' ">and level=#{level}</if>  
+			<if test=" memberLevel !=null and memberLevel !='' ">and memberLevel=#{memberLevel}</if>  
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">and points=#{points}</if>  
 			<!-- 注册会员时间 -->  
@@ -17,13 +17,17 @@
 			<if test=" deadLine !=null ">and deadLine=#{deadLine}</if> 
 		</where> 
 	</select>
+	<!-- 高级检索 -->
+	<select id="superSearch" parameterType="String" resultType="Member">SELECT * FROM member 
+		<where></where> 
+	</select>
 	<!-- 动态保存member -->
 	<insert parameterType="Member" id="addMember">INSERT INTO member
 		<trim prefix="(" suffix=")" suffixOverrides=","> 
 			<!-- 主键id -->  
 			<if test=" id !=null and id !='' ">id,</if>  
 			<!-- 会员等级 -->  
-			<if test=" level !=null and level !='' ">level,</if>  
+			<if test=" memberLevel !=null and memberLevel !='' ">memberLevel,</if>  
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">points,</if>  
 			<!-- 注册会员时间 -->  
@@ -35,7 +39,7 @@
 			<!-- 主键id -->  
 			<if test=" id !=null and id !='' ">#{id},</if>  
 			<!-- 会员等级 -->  
-			<if test=" level !=null and level !='' ">#{level},</if>  
+			<if test=" memberLevel !=null and memberLevel !='' ">#{memberLevel},</if>  
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">#{points},</if>  
 			<!-- 注册会员时间 -->  
@@ -51,7 +55,7 @@
 			<!-- 主键id -->  
 			<if test=" id !=null and id !='' ">id=#{id},</if>  
 			<!-- 会员等级 -->  
-			<if test=" level !=null and level !='' ">level=#{level},</if>  
+			<if test=" memberLevel !=null and memberLevel !='' ">memberLevel=#{memberLevel},</if>  
 			<!-- 会员积分 -->  
 			<if test=" points !=null and points !='' ">points=#{points},</if>  
 			<!-- 注册会员时间 -->  

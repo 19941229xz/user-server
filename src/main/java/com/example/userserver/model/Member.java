@@ -16,8 +16,8 @@ public class Member implements Serializable {
     @ApiModelProperty(value = "主键id" ,name = "id")
 	private Integer id;
 	// 会员等级
-    @ApiModelProperty(value = "会员等级" ,name = "level")
-	private Integer level;
+    @ApiModelProperty(value = "会员等级" ,name = "memberLevel")
+	private Integer memberLevel;
 	// 会员积分
     @ApiModelProperty(value = "会员积分" ,name = "points")
 	private Integer points;

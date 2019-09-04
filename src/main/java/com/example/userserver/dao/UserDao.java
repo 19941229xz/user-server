@@ -24,6 +24,6 @@ public interface UserDao {
     User getUserByUserName(String userName);
 
 
-
+	List<User> superSearch(String superSearchKeyWord);
 
 }

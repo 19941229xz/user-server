@@ -31,16 +31,31 @@ public class BanjiServiceImpl implements BanjiService {
     @Transactional(readOnly = true)
 	public Object getAllBanji(PageParam<Banji> pageParam){
     
-    	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
-        for(int i=0;i<pageParam.getOrderParams().length;i++){
-            PageHelper.orderBy(pageParam.getOrderParams()[i]);
+    	if(StringUtils.isEmpty(pageParam.getSuperSearchKeyWord())){
+            PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Banji> banjiList=banjiDao.getAllBanji(pageParam.getModel());
+            PageInfo<Banji> banjiPageInfo = new PageInfo<Banji>(banjiList);
+    
+            return banjiPageInfo;
+        }else{
+        	PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize());
+            for(int i=0;i<pageParam.getOrderParams().length;i++){
+                PageHelper.orderBy(pageParam.getOrderParams()[i]);
+            }
+    
+    
+            List<Banji> banjiList=banjiDao.superSearch(pageParam.getSuperSearchKeyWord());
+            PageInfo<Banji> banjiPageInfo = new PageInfo<Banji>(banjiList);
+    
+            return banjiPageInfo;
         }
-
-
-        List<Banji> banjiList=banjiDao.getAllBanji(pageParam.getModel());
-        PageInfo<Banji> banjiPageInfo = new PageInfo<Banji>(banjiList);
-
-        return banjiPageInfo;
+    
+    	
     
     }
 

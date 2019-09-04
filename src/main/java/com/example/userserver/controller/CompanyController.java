@@ -24,13 +24,21 @@ public class CompanyController {
     public Object getAllCompany(@RequestBody PageParam<Company> pageParam){
         return MyRsp.success(companyService.getAllCompany(pageParam)).msg("查询成功");
     }
+    
+    @ApiOperation("按照关键字高级检索所有公司 支持分页和排序")
+    @PostMapping("/superSearchCompany")
+    public Object superSearch(@RequestBody PageParam<Company> pageParam){
+        return MyRsp.success(companyService.getAllCompany(pageParam)).msg("检索成功");
+    }
 
+	@ApiOperation("通过id删除公司，同时会清空redis缓存")
     @GetMapping("/removeCompanyById/{id}")
     public Object removeCompanyByCompanyName(@PathVariable("id") int id){
 
         return companyService.removeCompanyById(id)?MyRsp.success(null).msg("删除成功"):MyRsp.error().msg("删除失败");
     }
 
+	@ApiOperation("添加{table.comment}，成功会将该数据放入redis缓存")
     @PostMapping("/addCompany")
     public Object addCompany(@RequestBody @Valid Company companyParam){
         Company company=(Company)companyService.addCompany(companyParam);
@@ -39,13 +47,14 @@ public class CompanyController {
                 msg("添加成功"):MyRsp.error().msg("添加失败");
     }
 
-
+	@ApiOperation("修改{table.comment}，成功会将清除该数据的redis缓存")
     @PutMapping("/updateCompany")
     public Object updateCompany(@RequestBody@Valid Company company){
         return companyService.updateCompany(company)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }
 
+	@ApiOperation("通过id获取{table.comment}，优先从redis缓存中查")
     @GetMapping("/getCompanyById/{id}")
     public Object getCompanyById(@PathVariable("id") int id){
 
@@ -53,6 +62,7 @@ public class CompanyController {
         return company!=null?MyRsp.success(company):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
     
+    @ApiOperation("通过id数组批量删除{table.comment}，删除成功也会清空redis缓存数据")
     @PostMapping("/batchDeleteCompanyByIds")
     public Object batchDeleteCompanyByIds(@RequestBody int[] ids){
 	    int affectedNum=0;

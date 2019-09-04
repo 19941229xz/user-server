@@ -24,13 +24,21 @@ public class RegionController {
     public Object getAllRegion(@RequestBody PageParam<Region> pageParam){
         return MyRsp.success(regionService.getAllRegion(pageParam)).msg("查询成功");
     }
+    
+    @ApiOperation("按照关键字高级检索所有地址信息 支持分页和排序")
+    @PostMapping("/superSearchRegion")
+    public Object superSearch(@RequestBody PageParam<Region> pageParam){
+        return MyRsp.success(regionService.getAllRegion(pageParam)).msg("检索成功");
+    }
 
+	@ApiOperation("通过id删除地址信息，同时会清空redis缓存")
     @GetMapping("/removeRegionById/{id}")
     public Object removeRegionByRegionName(@PathVariable("id") int id){
 
         return regionService.removeRegionById(id)?MyRsp.success(null).msg("删除成功"):MyRsp.error().msg("删除失败");
     }
 
+	@ApiOperation("添加{table.comment}，成功会将该数据放入redis缓存")
     @PostMapping("/addRegion")
     public Object addRegion(@RequestBody @Valid Region regionParam){
         Region region=(Region)regionService.addRegion(regionParam);
@@ -39,13 +47,14 @@ public class RegionController {
                 msg("添加成功"):MyRsp.error().msg("添加失败");
     }
 
-
+	@ApiOperation("修改{table.comment}，成功会将清除该数据的redis缓存")
     @PutMapping("/updateRegion")
     public Object updateRegion(@RequestBody@Valid Region region){
         return regionService.updateRegion(region)?MyRsp.success(null)
                 .msg("修改成功"):MyRsp.error().msg("修改失败");
     }
 
+	@ApiOperation("通过id获取{table.comment}，优先从redis缓存中查")
     @GetMapping("/getRegionById/{id}")
     public Object getRegionById(@PathVariable("id") int id){
 
@@ -53,6 +62,7 @@ public class RegionController {
         return region!=null?MyRsp.success(region):MyRsp.wrapper(new MyException(HttpCode.ITEM_NOT_FOUND));
     }
     
+    @ApiOperation("通过id数组批量删除{table.comment}，删除成功也会清空redis缓存数据")
     @PostMapping("/batchDeleteRegionByIds")
     public Object batchDeleteRegionByIds(@RequestBody int[] ids){
 	    int affectedNum=0;

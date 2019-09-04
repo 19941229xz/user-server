@@ -24,6 +24,6 @@ public interface CourseDao {
     Course getCourseByCourseName(String courseName);
 
 
-
+	List<Course> superSearch(String superSearchKeyWord);
 
 }

@@ -42,5 +42,8 @@ public class Teacher implements Serializable {
 	// 教师地址id（关联地区表）
     @ApiModelProperty(value = "教师地址id（关联地区表）" ,name = "regionId")
 	private Integer regionId;
+	// 岗位id
+    @ApiModelProperty(value = "岗位id" ,name = "jobTypeId")
+	private Integer jobTypeId;
 
 }

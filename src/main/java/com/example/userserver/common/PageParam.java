@@ -19,4 +19,7 @@ public class PageParam<Model> {
 
     @ApiModelProperty(value = "每页记录条数",name = "pageSize")
     private int pageSize;
+
+    @ApiModelProperty(value = "高级检索关键词（自动模糊匹配所有字符串类型字段）",name = "superSearchKeyWord")
+    private String superSearchKeyWord;
 }
